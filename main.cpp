@@ -54,6 +54,7 @@ int main()
 ---------------------------------------GITHUB-------------------------------------------------
 
 Envoyer projet :
+    - compiler projet
     - git status
     - git add *.cpp
     - git add *.h
