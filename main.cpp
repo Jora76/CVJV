@@ -50,3 +50,17 @@ int main()
 - sound design
 - animations de certains sprites
 */
+/*
+---------------------------------------GITHUB-------------------------------------------------
+
+Envoyer projet :
+    - git add *.cpp
+    - git add *.h
+    - git commit -m 'modif'
+    - git push origin master
+
+Recuperer projet :
+    - git fetch
+    - git pull
+*/
+
