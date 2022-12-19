@@ -54,12 +54,14 @@ int main()
 ---------------------------------------GITHUB-------------------------------------------------
 
 Envoyer projet :
+    - git status
     - git add *.cpp
     - git add *.h
     - git commit -m 'modif'
     - git push origin master
 
 Recuperer projet :
+    - git status
     - git fetch
     - git pull
 */
