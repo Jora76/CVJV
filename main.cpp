@@ -28,7 +28,7 @@ int main()
         window.setKeyRepeatEnabled(false);
         interface.positionner();
         interface.gererSouris(event, window);
-        //interface.actualiser();
+        interface.actualiser();
         window.clear();
         interface.afficher(window);
         jeu.afficherTexte(window);

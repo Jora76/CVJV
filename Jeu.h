@@ -7,6 +7,7 @@
 //#include "Interface.h"
 #include "Fenetre.h"
 #include "BoutonValider.h"
+#include "BoutonSupprimer.h"
 #include "Enigme.h"
 #include "GestionnaireRessources.h"
 #include "Curseur.h"

@@ -72,6 +72,7 @@ void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 					break;
 			}
 			valider = true;
+			break;
 		default:
 			break;
 		}

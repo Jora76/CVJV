@@ -28,11 +28,11 @@ void ElementInterface::testerCollision(ElementInterface& autre)
 	if (distance <= getRayon() + autre.getRayon())
 	{
 		autre.reagirCollision(TypeElement::CURSEUR);
+
 		if (autre.type == TypeElement::PANNEAU
 			&& reactionDejaAppelee == false
 			&& (distance <= getRayon() + autre.getRayon() - 31.f)/* || (distance <= getRayon() + autre.getRayon() - 30.5f)*/)
 		{
-			//std::cout << "touche" << std::endl;
 			reagirCollision(autre.type, autre.getAngle());
 			reactionDejaAppelee = true;
 			autre.type = TypeElement::PANNEAU_TOUCHE;
@@ -81,3 +81,16 @@ bool ElementInterface::estCheckpoint()
 		return true;
 	return false;
 }
+
+bool ElementInterface::estCheckPointRecupere()
+{
+	if (type == TypeElement::CHECKPOINT_RECUPERE)
+		return true;
+	return false;
+}
+
+void ElementInterface::setType(TypeElement changementType)
+{
+	type = changementType;
+}
+

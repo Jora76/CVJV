@@ -10,7 +10,14 @@ void CheckPoint::reagirCollision(TypeElement typeAutre, float angle)
 {
 	if (typeAutre == TypeElement::CURSEUR)
 	{
-
-		supprimer = true;
+		type = TypeElement::CHECKPOINT_RECUPERE;
 	}
+}
+
+void CheckPoint::actualiser()
+{
+	if (type == TypeElement::CHECKPOINT)
+		sprite.setColor(sf::Color::White);
+	else
+		sprite.setColor(sf::Color::Color(0, 0, 0, 0));
 }

@@ -10,6 +10,7 @@ public:
     void sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
     static inline bool aSupprimer(std::unique_ptr<Bouton>& bouton) { return bouton->supprimer; };
     inline bool getValider() { return valider; };
+    Coordonnees supprimerSiPanneau();
 protected:
     virtual void reagirClic(sf::Event& event) = 0;
     bool selection{ false };

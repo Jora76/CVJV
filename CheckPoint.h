@@ -11,5 +11,6 @@ public:
 
 private:
 	virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
+	virtual void actualiser() override;
 };
 

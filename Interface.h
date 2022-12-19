@@ -16,9 +16,11 @@ public:
 	void gererCollisions(ElementInterface* curseur);
 	void gererSouris(sf::Event& event, sf::RenderWindow& window);
 	void nettoyer();
-	//void actualiser();
+	void actualiser();
 	bool verifierCheckPoints();
 	void vider();
+	void reinitialiserGrille();
+	std::vector<Coordonnees> viderGrille();
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};

@@ -87,9 +87,9 @@ void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window)
 			bouton->sourisEstDessus(event, window);
 		}
 	}
-}/*
+}
 
- Utile pour déplacement curseur mais je sais pas pourquoi j'ai mis ce corps de fonction juste pour ça 
+ //Utile pour déplacement curseur mais je sais pas pourquoi j'ai mis ce corps de fonction juste pour ça 
 
 void Interface::actualiser()
 {
@@ -97,7 +97,11 @@ void Interface::actualiser()
 	{
 		boutons[i]->actualiser();
 	}
-}*/
+	for (auto i{ 0u }; i < elements.size(); ++i)
+	{
+		elements[i]->actualiser();
+	}
+}
 
 bool Interface::verifierCheckPoints()
 {
@@ -110,6 +114,30 @@ bool Interface::verifierCheckPoints()
 		else if (elements[i]->estCheckpoint() == true)
 			return false;
 	}
+}
+
+void Interface::reinitialiserGrille()
+{
+	for (auto& element : elements)
+	{
+		if (element->estCheckPointRecupere() == true)
+			element->setType(TypeElement::CHECKPOINT);
+	}
+}
+
+std::vector<Coordonnees> Interface::viderGrille() // cette méthode montre bien qu'il faut que tu codes le glisser/déposer mec
+{
+	std::vector<Coordonnees> TableauPositions;
+	TableauPositions.clear();
+	for (auto& bouton : boutons)
+	{
+		if (bouton->supprimerSiPanneau().getX() != 0 && bouton->supprimerSiPanneau().getY() != 0)
+		{
+			Coordonnees position = bouton->supprimerSiPanneau();
+			TableauPositions.push_back(position);
+		}
+	}
+	return TableauPositions;
 }
 
 void Interface::vider()

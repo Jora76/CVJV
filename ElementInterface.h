@@ -4,7 +4,7 @@
 #include "Coordonnees.h"
 //#include "Curseur.h" à ne pas décommenter sinon erreur
 
-enum class TypeElement { CURSEUR, OBSTACLE, INTERRUPTEUR, PANNEAU, PANNEAU_TOUCHE, CHECKPOINT, AUTRE, TP, TP_TOUCHE };
+enum class TypeElement { CURSEUR, OBSTACLE, INTERRUPTEUR, PANNEAU, PANNEAU_TOUCHE, CHECKPOINT, CHECKPOINT_RECUPERE, AUTRE, TP, TP_TOUCHE };
 
 class ElementInterface
 {
@@ -21,6 +21,8 @@ public:
 	static inline bool aSupprimer(std::unique_ptr<ElementInterface>& element) { return element->supprimer; };
 	virtual void actualiser();
 	bool estCheckpoint();
+	bool estCheckPointRecupere();
+	void setType(TypeElement changementType);
 protected:
 	float getAngle() const;
 	bool supprimer{ false };

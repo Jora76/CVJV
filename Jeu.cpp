@@ -11,6 +11,7 @@ void Jeu::demarrer()
     choisirEnigme();
     interface.ajouter(std::make_unique<Fenetre>(cheminFenetre));
     interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
+    interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
     enigme.generer(cheminEnigme);
 }
 

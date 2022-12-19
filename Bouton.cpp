@@ -35,7 +35,18 @@ void Bouton::testerClic(sf::Event& event)
 		}
 	}
 
-}		/*
+}	
+
+Coordonnees Bouton::supprimerSiPanneau()
+{
+	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
+	{
+		supprimer = true;
+		return position;
+	}
+}
+
+/*
 -------------------------
 ----------------------------------------------------------------------------------------			
 			*/

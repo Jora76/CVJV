@@ -9,8 +9,14 @@ void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
 {
 	if (typeAutre == TypeElement::CURSEUR)
 	{
-		if (interface.verifierCheckPoints())
+		if (interface.verifierCheckPoints() == true)
+		{
 			interface.vider();
+		}
+		else
+		{
+			interface.reinitialiserGrille();
+		}
 	}
 }
 
