@@ -16,6 +16,7 @@ protected:
     bool supprimer{ false };
     static bool valider;
     sf::Clock dernierClic;
+    virtual void setCouleur(bool sourisDessus) = 0;
     //sf::Event event{};
 private:
     void testerClic(sf::Event& event);

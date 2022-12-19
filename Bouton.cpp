@@ -16,12 +16,12 @@ void Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
 	auto distance = position.calculerDistance(positionSouris);
 	if (distance < sprite.getGlobalBounds().height / 2.4)
 	{
-		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
+		setCouleur(true);
 		testerClic(event);
 	}
 	else
 	{
-		sprite.setColor(sf::Color::Color(22, 49, 32, 255));
+		setCouleur(false);
 	}
 }
 
@@ -34,12 +34,12 @@ void Bouton::testerClic(sf::Event& event)
 			reagirClic(event);
 		}
 	}
-			
-			/*
+
+}		/*
 -------------------------
 ----------------------------------------------------------------------------------------			
 			*/
-}/*
+/*
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		reagirClic();*/
 		

@@ -28,7 +28,7 @@ void Interface::afficher(sf::RenderWindow& window) const //affiche les éléments 
 }
 
 
-void Interface::positionner() //
+void Interface::positionner() //place les élements dans l'interface
 {
 	for (auto i{ 0u }; i < elements.size(); ++i)
 	{
@@ -43,6 +43,12 @@ void Interface::positionner() //
 
 void Interface::nettoyer() //ajoute les éléments du vector temporaire au vector principal et vide le vector temporaire
 {
+	if (aVider)
+	{
+		elements.clear();
+		boutons.clear();
+		aVider = false;
+	}
 	auto finTableau = std::remove_if(std::begin(elements), std::end(elements), ElementInterface::aSupprimer);
 	elements.erase(finTableau, std::end(elements));
 	for (auto& element : aAjouter)
@@ -81,7 +87,9 @@ void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window)
 			bouton->sourisEstDessus(event, window);
 		}
 	}
-}
+}/*
+
+ Utile pour déplacement curseur mais je sais pas pourquoi j'ai mis ce corps de fonction juste pour ça 
 
 void Interface::actualiser()
 {
@@ -89,6 +97,24 @@ void Interface::actualiser()
 	{
 		boutons[i]->actualiser();
 	}
+}*/
+
+bool Interface::verifierCheckPoints()
+{
+	for (size_t i{ 0 }; i < elements.size(); ++i)
+	{
+		if (elements[i]->estCheckpoint() == false && i == elements.size() - 1)
+		{
+			return true;
+		}
+		else if (elements[i]->estCheckpoint() == true)
+			return false;
+	}
+}
+
+void Interface::vider()
+{
+	aVider = true;
 }
 
 /*

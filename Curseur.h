@@ -17,16 +17,18 @@ private:
 	void mettreAJour(float temps);
 	virtual void reagirClic(sf::Event& event) override;
 	virtual void actualiser() override;
+	virtual void setCouleur(bool sourisDessus) override;
+	void resetPosition();
 
 	//Attributs
 	Vecteur vitesse{ 0.0f, 0.0f };
 	Interface& interface;
 	Coordonnees posInit{};
 	sf::Clock chrono;
-	float test;
+	//float test;
 
-	static constexpr float ACCELERATION{ 200.f };
+	static constexpr float ACCELERATION{ 250.f };
 	//static constexpr float COEF_FROTTEMENTS{ 2.f };
-	static constexpr float VITESSE_ANGULAIRE{ 300.f };
+	//static constexpr float VITESSE_ANGULAIRE{ 300.f };
 };
 

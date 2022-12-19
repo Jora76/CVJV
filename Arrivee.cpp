@@ -5,7 +5,21 @@ Arrivee::Arrivee(Interface& interface_ptr, Coordonnees const& position_ptr) : El
 	position = position_ptr;
 }
 
-//void Arrivee::reagirCollision(TypeElement typeAutre)
-//{
-//	sprite.setColor(sf::Color::Red);
-//}
+void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
+{
+	if (typeAutre == TypeElement::CURSEUR)
+	{
+		if (interface.verifierCheckPoints())
+			interface.vider();
+	}
+}
+
+/*
+void Arrivee::compterCheckpoint()
+{
+	++ checkPointsRecuperes;
+}
+
+/*
+	Objectif : lier comptage de checkpoints entre Arrivee, Jeu et CheckPoint.
+*/

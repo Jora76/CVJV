@@ -12,3 +12,11 @@ void BoutonValider::reagirClic(sf::Event& event)
 {
 	valider = true;
 }
+
+void BoutonValider::setCouleur(bool sourisDessus)
+{
+	if (sourisDessus)
+		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
+	else
+		sprite.setColor(sf::Color::Color(22, 49, 32, 255));
+}

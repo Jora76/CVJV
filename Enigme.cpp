@@ -1,8 +1,7 @@
 #include "Enigme.h"
 
 Enigme::Enigme(Interface& interface_ptr) : interface {interface_ptr}
-{
-}
+{}
 
 void Enigme::lireFichier(std::string_view const& chemin)
 {
@@ -34,8 +33,10 @@ void Enigme::generer(std::string_view const& chemin)
 		case coordonneesPremiereCase:
 			position.setX(grille[1]);
 			position.setY(grille[2]);
+			Coordonnees::initialiserGrille(position.getX(), position.getY());
 			break;
 		//case qtePanneaux:
+			
 		case comp:
 			++grille_Iter;
 			for (grille_Iter; grille_Iter < grille.size(); ++grille_Iter)
@@ -44,7 +45,7 @@ void Enigme::generer(std::string_view const& chemin)
 				{
 				case boutonGrille:
 					if(grille[grille_Iter + 1] == fin)
-						Coordonnees::initialiserGrille(position.getX(), position.getY());
+						position.setFinGrilleY(position.getY());
 					interface.ajouterBouton(std::make_unique<BoutonGrille>(interface, position));
 					break;
 				case checkPoint:
@@ -54,7 +55,7 @@ void Enigme::generer(std::string_view const& chemin)
 					interface.ajouter(std::make_unique<Arrivee>(interface, position));
 					break;
 				case obstacle:
-					//interface.ajouter(std::make_unique<Obstacle>(interface, position));
+					interface.ajouter(std::make_unique<Obstacle>(interface, position));
 					break;
 				case depart:
 					break;
@@ -65,9 +66,12 @@ void Enigme::generer(std::string_view const& chemin)
 					interface.ajouter(std::make_unique<Interrupteur>(interface, position));
 					break;
 				case ligneSuivante:
+					position.setFinGrilleX(position.getX());
 					position.setX(grille[1] - OFFSET);
 					position.setY(OFFSET);
-					break;
+					break;/*
+				case fin:
+					position.setFinGrilleY(position.getY());*/
 				}
 				position.setX(OFFSET);
 			}
@@ -91,4 +95,4 @@ void Enigme::generer(std::string_view const& chemin)
 	incrémentant les coordonnees de position grâce à l'offset initialisé dans le header d'Enigme
 	
 	Etant limité par la SFML, j'ai dû mettre le curseur en dernier dans l'ordre d'appel afin que le 
-	Z-index soit respecté. Dans le cas contraire, Curseur serait passé en dessous des objets appelés après lui.*/
+	Z-index soit respecté. Dans le cas contraire, Curseur serait passé en dessous des objets appelés après lui. (reglé)*/

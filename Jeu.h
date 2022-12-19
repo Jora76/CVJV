@@ -4,7 +4,7 @@
 #include <memory>
 #include <string>
 
-#include "Interface.h"
+//#include "Interface.h"
 #include "Fenetre.h"
 #include "BoutonValider.h"
 #include "Enigme.h"
@@ -17,11 +17,12 @@ public :
 	Jeu(Interface& interface_ptr, Enigme& enigme_ptr);
 	void demarrer();
 	void afficherTexte(sf::RenderWindow& fenetre);
-	//void terminer();
+	//void continuer();
+	void terminer();
 
 private:
 	Interface& interface;
-	Enigme& enigme;
+	Enigme &enigme;
 	bool enCours{ false };
 	short unsigned int compteur{ 0 };
 	std::string cheminFenetre;
@@ -31,5 +32,7 @@ private:
 
 	void choisirEnigme();
 	void definirTexte(sf::Text& texte);
+	void retirerTexte();
+	void actualiser();
 };
 

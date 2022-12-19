@@ -16,6 +16,9 @@ public:
 	Coordonnees();
 	Coordonnees(float px, float py);
 	float calculerDistance(Coordonnees const& autre) const;
+	void setFinGrilleX(int longueurGrille);
+	void setFinGrilleY(int hauteurGrille);
+	bool limiteGrille();
 
 private:
 	float x{};
@@ -23,6 +26,8 @@ private:
 
 	static int grilleX;
 	static int grilleY;
+	int finGrilleX = 0;
+	int finGrilleY = 0;
 
 };
 

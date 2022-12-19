@@ -16,12 +16,15 @@ public:
 	void gererCollisions(ElementInterface* curseur);
 	void gererSouris(sf::Event& event, sf::RenderWindow& window);
 	void nettoyer();
-	void actualiser();
+	//void actualiser();
+	bool verifierCheckPoints();
+	void vider();
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};
 	std::vector<std::unique_ptr<ElementInterface>> aAjouter{};
 	std::vector<std::unique_ptr<Bouton>> boutonAAjouter{};
 	std::vector<std::unique_ptr<Bouton>> boutons{}; //source du pb avec Coordonnees::calculerDistance
+	bool aVider = false;
 };
 

@@ -4,13 +4,13 @@
 #include "Interface.h"
 #include "Enigme.h"
 #include "Jeu.h"
-#include "Curseur.h"
 
 constexpr int LONGUEUR_FENETRE{ 1280 };
 constexpr int HAUTEUR_FENETRE{ 720 };
 
 int main()
 {
+    sf::Event event;
     sf::RenderWindow window(sf::VideoMode(LONGUEUR_FENETRE, HAUTEUR_FENETRE), "CV Jeu-vidéo");
     auto interface = Interface{};
     auto enigme = Enigme{interface};
@@ -20,7 +20,6 @@ int main()
 
     while (window.isOpen())
     {
-        sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -29,7 +28,7 @@ int main()
         window.setKeyRepeatEnabled(false);
         interface.positionner();
         interface.gererSouris(event, window);
-        interface.actualiser();
+        //interface.actualiser();
         window.clear();
         interface.afficher(window);
         jeu.afficherTexte(window);

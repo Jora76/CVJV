@@ -11,6 +11,10 @@ Curseur::Curseur(Interface& interface_ptr, Coordonnees const& position_ptr) : Bo
 
 void Curseur::mettreAJour(float temps) //methode qui calcule les déplacements du curseur en fonction du panneau rencontré et de l'état du bonton valider
 {
+	if (position.limiteGrille() == true)
+	{
+		resetPosition();
+	}
 	if(valider)
 	{
 		vitesse += Vecteur::creerDepuisAngle(ACCELERATION * temps, sprite.getRotation());
@@ -28,36 +32,46 @@ void Curseur::actualiser()
 	auto deplacement = vitesse * tempsBoucle;
 	position += deplacement;
 	sprite.setPosition(position.getX(), position.getY());
-	interface.gererCollisions(this);
+	if(valider)
+		interface.gererCollisions(this);
 }
 
 void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 {
+	int testAngle = sprite.getRotation();
 	if (typeAutre != type && typeAutre != TypeElement::AUTRE)
 	{
-		/*if (typeAutre == TypeElement::OBSTACLE)
-		{
-			position = posInit;
-			valider = false;
-		}
-		else if (typeAutre == TypeElement::PANNEAU)
-		{
-			sprite.setRotation(angle - sprite.getRotation());
-		}*/
 		switch (typeAutre)
 		{
 		case TypeElement::OBSTACLE :
-			position = posInit;
-			valider = false;
+			resetPosition();
 			break;
 
 		case TypeElement::PANNEAU :
-			if (test != sprite.getRotation())
-			{
-				sprite.setRotation(abs(angle - sprite.getRotation()));
-				test = sprite.getRotation();
-			}
+			valider = false;
+				sprite.setRotation(angle);
+				vitesse -= vitesse;
+				valider = true;
 			break;
+		case TypeElement::TP :
+			valider = false;
+			vitesse -= vitesse;
+			switch (testAngle)
+			{
+				case 0:
+					position.setX(80);
+					break;
+				case 90:
+					position.setY(80);
+					break;
+				case 180:
+					position.setX(-80);
+					break;
+				case 270:
+					position.setY(-80);
+					break;
+			}
+			valider = true;
 		default:
 			break;
 		}
@@ -76,14 +90,17 @@ void Curseur::reagirClic(sf::Event& event)
 		}
 	}
 }
-	
-/*
-Pour rotation curseur lorsqu'il rencontre panneau. Tu prends l'attribut angle de Panneau et
-tu le soustrais à l'angle de rotation du Curseur
 
-Problème : La condition test != sprite.getRotation() permet de changer la rotation du curseur
-mais qu'une seule et meme fois. Donc faut changer de strat. Tout en corrigeant le bug du chacarron macarron.
-Voir bug du curseur qui fait un chacarron macarron quand tu cliques dessus. Origine du bug 
-Bouton::testerClic() -> if(event.type == sf::Event::MouseButtonReleased) qui tourne en boucle 
-tant que la souris garde les memes coordonnees que celles relevées lors du clic release.
-*/
+void Curseur::setCouleur(bool sourisDessus)
+{
+	if (sourisDessus)
+		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
+	else
+		sprite.setColor(sf::Color::Color(0, 150, 0, 255));
+}
+
+void Curseur::resetPosition()
+{
+	position = posInit;
+	valider = false;
+}

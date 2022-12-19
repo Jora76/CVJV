@@ -10,5 +10,6 @@ public:
 	Interface& interface;
 
 private:
+	virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
 };
 

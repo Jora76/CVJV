@@ -24,13 +24,40 @@ void ElementInterface::positionner()
 void ElementInterface::testerCollision(ElementInterface& autre)
 {
 	auto distance = position.calculerDistance(autre.position);
-	if (distance < getRayon() + autre.getRayon())
+	
+	if (distance <= getRayon() + autre.getRayon())
 	{
-		if (autre.type == TypeElement::PANNEAU)
+		autre.reagirCollision(TypeElement::CURSEUR);
+		if (autre.type == TypeElement::PANNEAU
+			&& reactionDejaAppelee == false
+			&& (distance <= getRayon() + autre.getRayon() - 31.f)/* || (distance <= getRayon() + autre.getRayon() - 30.5f)*/)
+		{
+			//std::cout << "touche" << std::endl;
 			reagirCollision(autre.type, autre.getAngle());
-		else
+			reactionDejaAppelee = true;
+			autre.type = TypeElement::PANNEAU_TOUCHE;
+		}
+		else if (autre.type != TypeElement::PANNEAU && autre.type != TypeElement::TP)
+		{
 			reagirCollision(autre.type);
+		}
+		else if (autre.type == TypeElement::TP 
+				 && distance <= getRayon() + autre.getRayon() - 31.f)
+		{
+			reagirCollision(autre.type);
+		}
 	}
+	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::PANNEAU_TOUCHE)
+	{
+		reactionDejaAppelee = false;
+		autre.type = TypeElement::PANNEAU;
+	}/*
+	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::TP_TOUCHE)
+	{
+		reactionDejaAppelee = false;
+		autre.type = TypeElement::TP;
+	}*/
+		
 }
 void ElementInterface::reagirCollision(TypeElement typeAutre, float angle)
 {}
@@ -40,10 +67,17 @@ void ElementInterface::actualiser()
 
 float ElementInterface::getRayon() const
 {
-	return sprite.getGlobalBounds().height / 2.4f;
+	return sprite.getGlobalBounds().height / 2.2f;
 }
 
 float ElementInterface::getAngle() const
 {
 	return sprite.getRotation();
+}
+
+bool ElementInterface::estCheckpoint()
+{
+	if (type == TypeElement::CHECKPOINT)
+		return true;
+	return false;
 }

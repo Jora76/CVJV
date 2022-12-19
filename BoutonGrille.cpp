@@ -1,6 +1,7 @@
 #include "BoutonGrille.h"
 #include "Bouton.h"
-#include "Obstacle.h"
+//#include "Obstacle.h"
+#include "Teleporteur.h"
 
 BoutonGrille::BoutonGrille(Interface& interface_ptr, Coordonnees const& position_ptr) : Bouton{position, "ressources/sprites/Bouton_grille.png" }, interface{interface_ptr}
 {
@@ -14,7 +15,6 @@ void BoutonGrille::reagirClic(sf::Event& event)
 	selection = true;
 		while (selection == true)
 		{
-			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 				selection = false;
 				supprimer = true;
@@ -36,6 +36,12 @@ void BoutonGrille::reagirClic(sf::Event& event)
 				supprimer = true;
 				interface.ajouterBouton(std::make_unique<Panneau>(position, 0.f));
 			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				selection = false;
+				supprimer = true;
+				interface.ajouterBouton(std::make_unique<Teleporteur>(position));
+			}
 
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) && dernierClic.getElapsedTime().asSeconds() > 0.2)
 			{
@@ -54,4 +60,12 @@ void BoutonGrille::reagirClic(sf::Event& event)
 			//}
 		}
 	
+}
+
+void BoutonGrille::setCouleur(bool sourisDessus)
+{
+	if(sourisDessus)
+		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
+	else
+		sprite.setColor(sf::Color::Color(22, 49, 32, 255));
 }

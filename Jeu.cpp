@@ -3,7 +3,6 @@
 
 Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr) : interface{ interface_ptr }, enigme{enigme_ptr}
 {
-
 }
 
 void Jeu::demarrer()
@@ -17,8 +16,11 @@ void Jeu::demarrer()
 
 void Jeu::choisirEnigme()
 {
-    if (compteur < 3)
+    if (compteur < 3) {
         ++compteur;
+    }
+    else
+        terminer();
     cheminEnigme = "ressources/niveaux/enigme" + std::to_string(compteur) + ".txt";
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
@@ -39,7 +41,18 @@ void Jeu::definirTexte(sf::Text& texte)
 {
     texte.setFillColor(sf::Color::Green);
 }
-//void Jeu::terminer()
-//{
 //
+//void Jeu::continuer()
+//{
+//    choisirEnigme();
 //}
+
+void Jeu::retirerTexte()
+{
+
+}
+void Jeu::terminer()
+{
+    interface.vider();
+    //retirerTexte();
+}

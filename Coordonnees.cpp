@@ -18,6 +18,7 @@ Coordonnees::Coordonnees()
 
 Coordonnees::Coordonnees(float px, float py) : x(px), y(py)
 {
+	limiteGrille();
 	//leDroitChemin();
 }
 
@@ -41,7 +42,7 @@ void Coordonnees::initialiserGrille(int lx, int ly)
 
 void Coordonnees::setX(int ix = 0)
 {
-	if (ix == 40)
+	if (ix == 40 || ix == 80 || ix == -80)
 		x += ix;
 	else {
 		x = ix;
@@ -50,7 +51,7 @@ void Coordonnees::setX(int ix = 0)
 
 void Coordonnees::setY(int iy) 
 { 
-	if (iy == 40)
+	if (iy == 40 || iy == 80 || iy == -80)
 		y += iy;
 	else
 	{
@@ -67,3 +68,24 @@ float Coordonnees::calculerDistance(Coordonnees const& autre) const
 	return sqrt(delta.x * delta.x + delta.y * delta.y);
 };
 
+bool Coordonnees::limiteGrille()
+{
+	if (x < grilleX - 10 || x > finGrilleX + 10 || y < grilleY - 10 || y > finGrilleY + 10)
+		return true;
+	else
+		return false;
+}
+
+void Coordonnees::setFinGrilleX(int longueurGrille)
+{
+	if(finGrilleX == 0)
+		finGrilleX = longueurGrille;
+	std::cout << finGrilleX << std::endl;
+}
+
+void Coordonnees::setFinGrilleY(int hauteurGrille)
+{
+	if(finGrilleY == 0)
+		finGrilleY = hauteurGrille;
+	std::cout << finGrilleY << std::endl;
+}
