@@ -18,7 +18,7 @@ public :
 	Jeu(Interface& interface_ptr, Enigme& enigme_ptr);
 	void demarrer();
 	void afficherTexte(sf::RenderWindow& fenetre);
-	//void continuer();
+	void actualiser();
 	void terminer();
 
 private:
@@ -34,6 +34,6 @@ private:
 	void choisirEnigme();
 	void definirTexte(sf::Text& texte);
 	void retirerTexte();
-	void actualiser();
+	void continuer();
 };
 

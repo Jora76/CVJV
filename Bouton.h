@@ -17,7 +17,6 @@ protected:
     virtual void reagirClic(sf::Event& event) = 0;
     bool selection{ false };
     bool supprimer{ false };
-    static bool valider;
     virtual void setCouleur(bool sourisDessus) = 0;
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window);
     //sf::Event event{};

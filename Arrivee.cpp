@@ -17,6 +17,7 @@ void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
 		{
 			interface.reinitialiserGrille();
 		}
+		valider = false;
 	}
 }
 

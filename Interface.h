@@ -23,13 +23,16 @@ public:
 	void viderGrille();
 	inline Coordonnees getPosBtn() { return positionBouton; };
 	bool dragAutre();
+	inline bool getContinuer() { return continuer; };
+	inline void setContinuer() { continuer = false; };
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};
 	std::vector<std::unique_ptr<ElementInterface>> aAjouter{};
 	std::vector<std::unique_ptr<Bouton>> boutonAAjouter{};
 	std::vector<std::unique_ptr<Bouton>> boutons{};
+	
 	bool aVider = false;
-
+	bool continuer{ false }; 
 	Coordonnees positionBouton;
 };

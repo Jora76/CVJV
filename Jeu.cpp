@@ -42,11 +42,20 @@ void Jeu::definirTexte(sf::Text& texte)
 {
     texte.setFillColor(sf::Color::Green);
 }
-//
-//void Jeu::continuer()
-//{
-//    choisirEnigme();
-//}
+
+void Jeu::continuer()
+{
+    demarrer();
+    interface.setContinuer();
+}
+
+void Jeu::actualiser()
+{
+    if (interface.getContinuer() == true)
+    {
+        continuer();
+    }
+}
 
 void Jeu::retirerTexte()
 {

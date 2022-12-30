@@ -32,6 +32,7 @@ int main()
         window.clear();
         interface.afficher(window);
         jeu.afficherTexte(window);
+        jeu.actualiser();
         window.display();
         interface.nettoyer(); 
     }

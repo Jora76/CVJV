@@ -78,14 +78,12 @@ bool Coordonnees::limiteGrille()
 
 void Coordonnees::setFinGrilleX(int longueurGrille)
 {
-	if(finGrilleX == 0)
-		finGrilleX = longueurGrille;
+	finGrilleX = longueurGrille;
 	std::cout << finGrilleX << std::endl;
 }
 
 void Coordonnees::setFinGrilleY(int hauteurGrille)
 {
-	if(finGrilleY == 0)
-		finGrilleY = hauteurGrille;
+	finGrilleY = hauteurGrille;
 	std::cout << finGrilleY << std::endl;
 }

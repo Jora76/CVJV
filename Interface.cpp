@@ -185,6 +185,7 @@ bool Interface::dragAutre()
 void Interface::vider()
 {
 	aVider = true;
+	continuer = true;
 }
 
 /*

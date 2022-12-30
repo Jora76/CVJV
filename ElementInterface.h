@@ -40,6 +40,7 @@ protected:
 	float getAngle() const;
 	bool supprimer{ false };
 	bool reactionDejaAppelee{ false };
+	static bool valider;
 	sf::Sprite sprite{};
 	TypeElement type{ TypeElement::AUTRE };
 	Coordonnees position{};
