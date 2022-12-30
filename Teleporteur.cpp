@@ -17,8 +17,5 @@ void Teleporteur::reagirCollision(TypeElement typeAutre, float angle)
 }
 void Teleporteur::setCouleur(bool sourisDessus)
 {
-	if (sourisDessus)
-		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
-	else
-		sprite.setColor(sf::Color::Color(22, 49, 32, 0));
+	sprite.setColor(sf::Color::Color(0, 255, 0, 255));
 }

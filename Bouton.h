@@ -7,19 +7,20 @@ class Bouton :
 {
 public:
     Bouton(Coordonnees const& position_ptr, std::string_view chemin);
-    void sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
+    bool sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
+    //void sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
     static inline bool aSupprimer(std::unique_ptr<Bouton>& bouton) { return bouton->supprimer; };
     inline bool getValider() { return valider; };
-    Coordonnees supprimerSiPanneau();
+    inline Coordonnees getPos() { return position; };
+    void supprimerPanneau();
 protected:
     virtual void reagirClic(sf::Event& event) = 0;
     bool selection{ false };
     bool supprimer{ false };
     static bool valider;
-    sf::Clock dernierClic;
     virtual void setCouleur(bool sourisDessus) = 0;
+    virtual void testerClic(sf::Event& event, sf::RenderWindow& window);
     //sf::Event event{};
 private:
-    void testerClic(sf::Event& event);
 };
 

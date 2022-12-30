@@ -7,43 +7,39 @@ Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : Eleme
 	type = TypeElement::AUTRE;
 }
 
-void Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
+bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
 {
 	float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x);
 	float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y);
-	Coordonnees positionSouris{ sourisX, sourisY };
 
-	auto distance = position.calculerDistance(positionSouris);
-	if (distance < sprite.getGlobalBounds().height / 2.4)
+	float btnxPosWidht = sprite.getPosition().x + sprite.getGlobalBounds().width / 2;
+	float btnyPosHeight = sprite.getPosition().y + sprite.getGlobalBounds().height / 2;
+
+	float btnxPosReelle = sprite.getPosition().x - sprite.getGlobalBounds().width / 2;
+	float btnyPosReelle = sprite.getPosition().y - sprite.getGlobalBounds().height / 2;
+
+	if ((sourisX < btnxPosWidht && sourisX > btnxPosReelle && sourisY < btnyPosHeight && sourisY > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
 	{
 		setCouleur(true);
-		testerClic(event);
+		testerClic(event, window);
+		return true;
 	}
 	else
 	{
 		setCouleur(false);
+		return false;
 	}
 }
 
-void Bouton::testerClic(sf::Event& event)
+void Bouton::testerClic(sf::Event& event, sf::RenderWindow& window)
 {
-	if (event.type == sf::Event::MouseButtonReleased)
-	{
-		if (event.mouseButton.button == sf::Mouse::Left)
-		{
-			reagirClic(event);
-		}
-	}
-
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		reagirClic(event);
 }	
 
-Coordonnees Bouton::supprimerSiPanneau()
+void Bouton::supprimerPanneau()
 {
-	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
-	{
-		supprimer = true;
-		return position;
-	}
+	supprimer = true;
 }
 
 /*

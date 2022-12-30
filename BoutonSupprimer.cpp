@@ -10,14 +10,7 @@ BoutonSupprimer::BoutonSupprimer(Interface& interface_ptr) : Bouton(position, "r
 
 void BoutonSupprimer::reagirClic(sf::Event& event)
 {
-	std::cout << "test";
-	std::vector<Coordonnees> rajouterGrille = interface.viderGrille();
-	for (auto& position : rajouterGrille)
-	{
-		interface.ajouterBouton(std::make_unique<BoutonGrille>(interface, position));
-	}
-	rajouterGrille.clear();
-	std::cout << rajouterGrille.size() << std::endl;
+	interface.viderGrille();
 }
 
 void BoutonSupprimer::setCouleur(bool sourisDessus)

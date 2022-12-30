@@ -2,7 +2,6 @@
 
 Interface::Interface()
 {
-
 }
 
 void Interface::ajouter(std::unique_ptr<ElementInterface> element) //ajoute les éléments fraichement chargés dans un vector temporaire pour éviter une erreur de copie des pointeurs uniques dans la mémoire
@@ -21,6 +20,7 @@ void Interface::afficher(sf::RenderWindow& window) const //affiche les éléments 
 	{
 		element->afficher(window);
 	}
+
 	for (auto& bouton : boutons)
 	{
 		bouton->afficher(window);
@@ -34,6 +34,7 @@ void Interface::positionner() //place les élements dans l'interface
 	{
 		elements[i]->positionner();
 	}
+
 	for (auto i{ 0u }; i < boutons.size(); ++i)
 	{
 		boutons[i]->positionner();
@@ -45,10 +46,13 @@ void Interface::nettoyer() //ajoute les éléments du vector temporaire au vector 
 {
 	if (aVider)
 	{
-		elements.clear();
+		elements.clear();    
 		boutons.clear();
 		aVider = false;
 	}
+
+//-----------------------------------------------------------------------------------------------------
+
 	auto finTableau = std::remove_if(std::begin(elements), std::end(elements), ElementInterface::aSupprimer);
 	elements.erase(finTableau, std::end(elements));
 	for (auto& element : aAjouter)
@@ -56,6 +60,8 @@ void Interface::nettoyer() //ajoute les éléments du vector temporaire au vector 
 		elements.push_back(std::move(element));
 	}
 	aAjouter.clear();
+
+//-----------------------------------------------------------------------------------------------------
 
 	auto finTableauBoutons = std::remove_if(std::begin(boutons), std::end(boutons), Bouton::aSupprimer);
 	boutons.erase(finTableauBoutons, std::end(boutons));
@@ -65,6 +71,10 @@ void Interface::nettoyer() //ajoute les éléments du vector temporaire au vector 
 	}
 	boutonAAjouter.clear();
 }
+
+/*Utile pour :
+*	- gestion collision curseur -> (elements -> tous && boutons -> panneaux)
+*/
 
 void Interface::gererCollisions(ElementInterface* curseur)
 {
@@ -78,20 +88,35 @@ void Interface::gererCollisions(ElementInterface* curseur)
 	}
 }
 
+/*Utile pour :
+*	- reactions clics des boutons (curseur, panneaux, boutons, boutons grille)
+*/
+
 void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window)
 {
 	if (sf::Event::MouseMoved)
 	{
 		for (auto& bouton : boutons)
 		{
-			bouton->sourisEstDessus(event, window);
+			if (bouton->getType() == TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
+			{
+				positionBouton = bouton->getPos();
+				//std::cout << "souris est dessus";
+			}
+			else if(bouton->getType() != TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
+			{
+				positionBouton = { 0.f, 0.f };
+				//bouton->sourisEstDessus(event, window);
+			}
 		}
 	}
 }
 
- //Utile pour déplacement curseur mais je sais pas pourquoi j'ai mis ce corps de fonction juste pour ça 
-
-void Interface::actualiser()
+ /*Utile pour :
+ *	- déplacement curseur
+ *	- apparition/disparition checkpoints
+ */
+void Interface::actualiser() 
 {
 	for (auto i{ 0u }; i < boutons.size(); ++i)
 	{
@@ -103,15 +128,21 @@ void Interface::actualiser()
 	}
 }
 
+/*Utile pour :
+*	- parcourir elements et regarder s'il y a encore des checkpoints avec type = CHECKPOINT
+*  Si il en reste, retourne false et remet les checkpoints et le curseur à leur position initiale
+*  si il n'y en a plus retourne true et appelle Interface::vider()
+*/
+
 bool Interface::verifierCheckPoints()
 {
 	for (size_t i{ 0 }; i < elements.size(); ++i)
 	{
-		if (elements[i]->estCheckpoint() == false && i == elements.size() - 1)
+		if (elements[i]->getType() != TypeElement::CHECKPOINT && i == elements.size() - 1)
 		{
 			return true;
 		}
-		else if (elements[i]->estCheckpoint() == true)
+		else if (elements[i]->getType() == TypeElement::CHECKPOINT)
 			return false;
 	}
 }
@@ -120,24 +151,35 @@ void Interface::reinitialiserGrille()
 {
 	for (auto& element : elements)
 	{
-		if (element->estCheckPointRecupere() == true)
+		if (element->getType() == TypeElement::CHECKPOINT_RECUPERE)
 			element->setType(TypeElement::CHECKPOINT);
 	}
 }
 
-std::vector<Coordonnees> Interface::viderGrille() // cette méthode montre bien qu'il faut que tu codes le glisser/déposer mec
+void Interface::viderGrille() 
 {
-	std::vector<Coordonnees> TableauPositions;
-	TableauPositions.clear();
 	for (auto& bouton : boutons)
 	{
-		if (bouton->supprimerSiPanneau().getX() != 0 && bouton->supprimerSiPanneau().getY() != 0)
+		if (bouton->getType() == TypeElement::PANNEAU)
 		{
-			Coordonnees position = bouton->supprimerSiPanneau();
-			TableauPositions.push_back(position);
+			bouton->supprimerPanneau();
 		}
 	}
-	return TableauPositions;
+}
+
+bool Interface::dragAutre()
+{
+	for (size_t i{ 0 }; i < boutons.size(); ++i)
+	{
+		if (boutons[i]->getType() == TypeElement::PANNEAU_DRAG)
+		{
+			return true;
+		}
+		else if (boutons[i]->getType() != TypeElement::PANNEAU_DRAG && i == boutons.size() - 1)
+		{
+			return false;
+		} 
+	}
 }
 
 void Interface::vider()
@@ -146,9 +188,5 @@ void Interface::vider()
 }
 
 /*
-Pour régler répétition de code pour les types Bouton et ElementInterface pourquoi pas
-leur créer une classe mere commune qui va gérer ...
-Avec typeid()
-faire fonction qui prend en parametre un bouton pour pouvoir utiliser méthodes de la classe bouton
-et pour savoir si l'objet testé doit utiliser cette fonction on utilise typeid()
+	Regler répétition de code dans cette classe, c'est vraiment le bordel là.
 */

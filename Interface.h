@@ -20,13 +20,16 @@ public:
 	bool verifierCheckPoints();
 	void vider();
 	void reinitialiserGrille();
-	std::vector<Coordonnees> viderGrille();
+	void viderGrille();
+	inline Coordonnees getPosBtn() { return positionBouton; };
+	bool dragAutre();
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};
 	std::vector<std::unique_ptr<ElementInterface>> aAjouter{};
 	std::vector<std::unique_ptr<Bouton>> boutonAAjouter{};
-	std::vector<std::unique_ptr<Bouton>> boutons{}; //source du pb avec Coordonnees::calculerDistance
+	std::vector<std::unique_ptr<Bouton>> boutons{};
 	bool aVider = false;
-};
 
+	Coordonnees positionBouton;
+};

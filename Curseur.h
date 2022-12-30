@@ -25,10 +25,9 @@ private:
 	Interface& interface;
 	Coordonnees posInit{};
 	sf::Clock chrono;
+	sf::Clock dernierClic;
 	//float test;
 
 	static constexpr float ACCELERATION{ 250.f };
-	//static constexpr float COEF_FROTTEMENTS{ 2.f };
-	//static constexpr float VITESSE_ANGULAIRE{ 300.f };
 };
 

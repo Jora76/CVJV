@@ -82,6 +82,26 @@ void Enigme::generer(std::string_view const& chemin)
 	position.setX(grille[3]);
 	position.setY(grille[4]);
 	interface.ajouterBouton(std::make_unique<Curseur>(interface, position));
+	// 152 296 -> 373 -> 451
+	auto posPanneauY = 316;
+	auto angle = 0.f;
+	position.setX(172); //ne pas oublier de mettre ça dans une variable const 
+	position.setY(posPanneauY); // pas celui la par contre
+	for (auto i = 0; i < 4; ++i)
+	{
+		//if(i < 4)
+		interface.ajouterBouton(std::make_unique<Panneau>(position, angle, interface));
+		if (i == 0 || i == 2)
+			angle += 180;
+		else
+		{
+			angle += 90;
+		}
+		posPanneauY += 77;
+		position.setY(posPanneauY);
+	}
+	interface.ajouterBouton(std::make_unique<Teleporteur>(position));
+	grille.clear();
 }
 
 /*void Enigme::lireFichier(std::string_view const& chemin)

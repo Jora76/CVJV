@@ -25,7 +25,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        window.setKeyRepeatEnabled(false);
+        //window.setKeyRepeatEnabled(false);
         interface.positionner();
         interface.gererSouris(event, window);
         interface.actualiser();
@@ -52,6 +52,8 @@ int main()
 */
 /*
 ---------------------------------------GITHUB-------------------------------------------------
+
+Afficher terminal VS : ctrl + ù
 
 Envoyer projet :
     - compiler projet

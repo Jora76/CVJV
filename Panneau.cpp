@@ -1,15 +1,53 @@
 #include "Panneau.h"
 
-Panneau::Panneau(const Coordonnees& position_ptr, const float angle_ptr) : Bouton{position, "ressources/sprites/Panneau_droite.png" }
+Panneau::Panneau(const Coordonnees& position_ptr, const float angle_ptr, Interface& interface_ptr) : Bouton{position, "ressources/sprites/Panneau_droite.png" }, interface{interface_ptr}
 {
-	type = TypeElement::PANNEAU;
+	type = TypeElement::PANNEAU_BASE;
 	position = position_ptr;
-	sprite.setRotation(angle_ptr);
+	posInit = position_ptr;
+	angle = angle_ptr;
+	sprite.setRotation(angle);
 	sprite.setScale(sprite.getScale().x, sprite.getScale().x);
 }
 
+void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
+{
+	sf::Vector2f poSouris(event.mouseButton.x, event.mouseButton.y);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		if (interface.dragAutre() == false)
+		{
+			type = TypeElement::PANNEAU_DRAG;
+		}
+		if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
+		{
+			position = {static_cast <float> (sf::Mouse::getPosition(window).x), static_cast <float>(sf::Mouse::getPosition(window).y) };
+			//testerCollision(*this);
+		}
+	}
+
+	if (event.type == sf::Event::MouseButtonReleased)
+	{
+		if (event.mouseButton.button == sf::Mouse::Left)
+		{
+			posDrop = interface.getPosBtn();
+			if (posDrop.getX() != 0 && posDrop.getY() != 0)
+			{
+				interface.ajouterBouton(std::make_unique<Panneau>(posInit, angle, interface));
+				position = posDrop;
+			}
+			else
+				position = posInit;
+			type = TypeElement::PANNEAU;
+		}
+	}
+	
+}
+
 void Panneau::reagirClic(sf::Event& event)
-{}
+{
+}
 
 void Panneau::reagirCollision(TypeElement typeAutre, float angle)
 {
@@ -18,10 +56,6 @@ void Panneau::reagirCollision(TypeElement typeAutre, float angle)
 }
 void Panneau::setCouleur(bool sourisDessus)
 {
-	if (sourisDessus)
-		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
-	else
-		sprite.setColor(sf::Color::Color(22, 49, 32, 255));
 }
 
 /*
