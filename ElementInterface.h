@@ -15,7 +15,7 @@ enum class TypeElement {
 	CHECKPOINT, 
 	CHECKPOINT_RECUPERE, 
 	TP, 
-	TP_TOUCHE,
+	TP_BASE,
 	BOUTON_GRILLE,
 	AUTRE
 };
@@ -36,10 +36,10 @@ public:
 	virtual void actualiser();
 	TypeElement getType() const;
 	void setType(TypeElement changementType);
-protected:
+	inline Coordonnees getPos() { return position; };
 	float getAngle() const;
+protected:
 	bool supprimer{ false };
-	bool reactionDejaAppelee{ false };
 	static bool valider;
 	sf::Sprite sprite{};
 	TypeElement type{ TypeElement::AUTRE };

@@ -101,7 +101,6 @@ void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window)
 			if (bouton->getType() == TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
 			{
 				positionBouton = bouton->getPos();
-				//std::cout << "souris est dessus";
 			}
 			else if(bouton->getType() != TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
 			{
@@ -132,6 +131,7 @@ void Interface::actualiser()
 *	- parcourir elements et regarder s'il y a encore des checkpoints avec type = CHECKPOINT
 *  Si il en reste, retourne false et remet les checkpoints et le curseur à leur position initiale
 *  si il n'y en a plus retourne true et appelle Interface::vider()
+*  Cette méthode est appelée lors de la collision entre Curseur et Arrivée.
 */
 
 bool Interface::verifierCheckPoints()
@@ -160,7 +160,7 @@ void Interface::viderGrille()
 {
 	for (auto& bouton : boutons)
 	{
-		if (bouton->getType() == TypeElement::PANNEAU)
+		if (bouton->getType() == TypeElement::PANNEAU || bouton->getType() == TypeElement::TP)
 		{
 			bouton->supprimerPanneau();
 		}

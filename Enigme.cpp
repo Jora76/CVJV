@@ -90,7 +90,7 @@ void Enigme::generer(std::string_view const& chemin)
 	for (auto i = 0; i < 4; ++i)
 	{
 		//if(i < 4)
-		interface.ajouterBouton(std::make_unique<Panneau>(position, angle, interface));
+		interface.ajouterBouton(std::make_unique<PanneauDirection>(position, angle, interface));
 		if (i == 0 || i == 2)
 			angle += 180;
 		else
@@ -100,7 +100,7 @@ void Enigme::generer(std::string_view const& chemin)
 		posPanneauY += 77;
 		position.setY(posPanneauY);
 	}
-	interface.ajouterBouton(std::make_unique<Teleporteur>(position));
+	interface.ajouterBouton(std::make_unique<Teleporteur>(position, interface));
 	grille.clear();
 }
 

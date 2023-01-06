@@ -22,46 +22,45 @@ void ElementInterface::positionner()
 }
 
 void ElementInterface::testerCollision(ElementInterface& autre)
-{
-	auto distance = position.calculerDistance(autre.position);
-	
-	if (distance <= getRayon() + autre.getRayon())
-	{
-		autre.reagirCollision(TypeElement::CURSEUR);
-
-		if (autre.type == TypeElement::PANNEAU
-			&& reactionDejaAppelee == false
-			&& (distance <= getRayon() + autre.getRayon() - 31.f)/* || (distance <= getRayon() + autre.getRayon() - 30.5f)*/)
-		{
-			reagirCollision(autre.type, autre.getAngle());
-			reactionDejaAppelee = true;
-			autre.type = TypeElement::PANNEAU_TOUCHE;
-		}
-		else if (autre.type != TypeElement::PANNEAU && autre.type != TypeElement::TP)
-		{
-			reagirCollision(autre.type);
-		}
-		else if (autre.type == TypeElement::TP
-			&& distance <= getRayon() + autre.getRayon() - 31.f)
-		{
-			reagirCollision(autre.type);
-		}
-	}
-	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::PANNEAU_TOUCHE)
-	{
-		reactionDejaAppelee = false;
-		autre.type = TypeElement::PANNEAU;
-	}
-	
-	
-	/*
-	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::TP_TOUCHE)
-	{
-		reactionDejaAppelee = false;
-		autre.type = TypeElement::TP;
-	}*/
-		
-}
+{}
+//void ElementInterface::testerCollision(ElementInterface& autre)
+//{
+//	auto distance = position.calculerDistance(autre.position);
+//	
+//	if (distance <= getRayon() + autre.getRayon())
+//	{
+//		autre.reagirCollision(TypeElement::CURSEUR);
+//
+//		if (autre.type == TypeElement::PANNEAU
+//			&& (distance <= getRayon() + autre.getRayon() - 31.f)/* || (distance <= getRayon() + autre.getRayon() - 30.5f)*/)
+//		{
+//			reagirCollision(autre.type, autre.getAngle());
+//			autre.type = TypeElement::PANNEAU_TOUCHE;
+//		}
+//		else if (autre.type != TypeElement::PANNEAU && autre.type != TypeElement::TP)
+//		{
+//			reagirCollision(autre.type);
+//		}
+//		else if (autre.type == TypeElement::TP
+//			&& distance <= getRayon() + autre.getRayon() - 31.f)
+//		{
+//			reagirCollision(autre.type);
+//		}
+//	}
+//	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::PANNEAU_TOUCHE)
+//	{
+//		autre.type = TypeElement::PANNEAU;
+//	}
+//	
+//	
+//	/*
+//	else if (distance > getRayon() + autre.getRayon() && autre.type == TypeElement::TP_TOUCHE)
+//	{
+//		reactionDejaAppelee = false;
+//		autre.type = TypeElement::TP;
+//	}*/
+//		
+//}
 void ElementInterface::reagirCollision(TypeElement typeAutre, float angle)
 {}
 

@@ -17,6 +17,7 @@
 #include "Interrupteur.h"
 #include "Obstacle.h"
 #include "Teleporteur.h"
+#include "PanneauDirection.h"
 
 class Enigme
 {

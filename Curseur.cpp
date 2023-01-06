@@ -36,6 +36,36 @@ void Curseur::actualiser()
 		interface.gererCollisions(this);
 }
 
+void Curseur::testerCollision(ElementInterface& autre)
+{
+	auto distance = position.calculerDistance(autre.getPos());
+
+	if (distance <= getRayon() + autre.getRayon())
+	{
+		autre.reagirCollision(TypeElement::CURSEUR);
+
+		if (autre.getType() == TypeElement::PANNEAU
+			&& (distance <= getRayon() + autre.getRayon() - 31.f))
+		{
+			reagirCollision(autre.getType(), autre.getAngle());
+			autre.setType(TypeElement::PANNEAU_TOUCHE);
+		}
+		else if (autre.getType() != TypeElement::PANNEAU && autre.getType() != TypeElement::TP)
+		{
+			reagirCollision(autre.getType());
+		}
+		else if (autre.getType() == TypeElement::TP
+			&& distance <= getRayon() + autre.getRayon() - 31.f)
+		{
+			reagirCollision(autre.getType());
+		}
+	}
+	else if (distance > getRayon() + autre.getRayon() && autre.getType() == TypeElement::PANNEAU_TOUCHE)
+	{
+		autre.setType(TypeElement::PANNEAU);
+	}
+}
+
 void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 {
 	int testAngle = sprite.getRotation();

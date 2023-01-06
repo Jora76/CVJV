@@ -1,14 +1,14 @@
 #pragma once
-#include "Bouton.h"
+#include "Panneau.h"
 class Teleporteur :
-    public Bouton
+    public Panneau
 {
 public:
-    explicit Teleporteur(const Coordonnees& position_ptr);
+    explicit Teleporteur(const Coordonnees& position_ptr, Interface& interface_ptr);
     //void setNombrePanneaux();
 private:
-    virtual void reagirClic(sf::Event& event) override;
-    virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
-    virtual void setCouleur(bool sourisDessus) override;
+    //virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
+    //virtual void setCouleur(bool sourisDessus) override;
+    virtual void genererPanneau() override;
 };
 

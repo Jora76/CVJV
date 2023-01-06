@@ -34,7 +34,9 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
 void Bouton::testerClic(sf::Event& event, sf::RenderWindow& window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
 		reagirClic(event);
+	}
 }	
 
 void Bouton::supprimerPanneau()
