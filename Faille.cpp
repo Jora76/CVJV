@@ -6,13 +6,10 @@ Faille::Faille(Interface& interface_ptr, Coordonnees const& position_ptr) : Elem
 	position = position_ptr;
 }
 
-//void Faille::reagirCollision(TypeElement typeAutre)
-//{
-//	if (typeAutre == TypeElement::CURSEUR)
-//	{
-//		if (!Interrupteur::ouvert)
-//			type = TypeElement::OBSTACLE;
-//		else
-//			type = TypeElement::AUTRE;
-//	}
-//}
+void Faille::actualiser()
+{
+	if (Interrupteur::getOuvert())
+		type = TypeElement::AUTRE;
+	else
+		type = TypeElement::OBSTACLE;
+}

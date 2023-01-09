@@ -13,5 +13,6 @@ public:
 private:/*
 	virtual void reagirCollision(TypeElement typeAutre) override;*/
 	Interface& interface;
+	virtual void actualiser() override;
 };
 

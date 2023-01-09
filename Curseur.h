@@ -5,6 +5,7 @@
 #include "Vecteur.h"
 #include "Interface.h"
 #include "Panneau.h"
+#include "Interrupteur.h"
 
 class Curseur : public Bouton
 {

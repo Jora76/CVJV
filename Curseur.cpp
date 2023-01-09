@@ -73,7 +73,8 @@ void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 	{
 		switch (typeAutre)
 		{
-		case TypeElement::OBSTACLE :
+		case TypeElement::OBSTACLE:
+			Interrupteur::setOuvert();
 			resetPosition();
 			break;
 
@@ -103,6 +104,9 @@ void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 			}
 			valider = true;
 			break;
+		case TypeElement::ARRIVEE:
+			resetPosition();
+			break;
 		default:
 			break;
 		}
@@ -116,7 +120,6 @@ void Curseur::reagirClic(sf::Event& event)
 		if (!valider)
 		{
 			sprite.setRotation(sprite.getRotation() + 90);
-			std::cout << sprite.getRotation() << std::endl;
 			dernierClic.restart();
 		}
 	}

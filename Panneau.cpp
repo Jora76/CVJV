@@ -9,39 +9,40 @@ Panneau::Panneau(const Coordonnees& position_ptr, Interface& interface_ptr, std:
 
 void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 {
-	sf::Vector2f poSouris(event.mouseButton.x, event.mouseButton.y);
-	std::cout << position.getX() << " " << position.getY() << std::endl;
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	if (!valider)
 	{
-		if (interface.dragAutre() == false)
+		sf::Vector2f poSouris(event.mouseButton.x, event.mouseButton.y);
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			setType(TypeElement::PANNEAU_DRAG);
+			if (interface.dragAutre() == false)
+			{
+				setType(TypeElement::PANNEAU_DRAG);
+			}
+			if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
+			{
+				position = { static_cast <float>(sf::Mouse::getPosition(window).x),
+					   static_cast <float>(sf::Mouse::getPosition(window).y) };
+			}
 		}
-		if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
-		{
-			position = { static_cast <float>(sf::Mouse::getPosition(window).x),
-				   static_cast <float>(sf::Mouse::getPosition(window).y) };
-		}
-	}
 
-	if (event.type == sf::Event::MouseButtonReleased)
-	{
-		if (event.mouseButton.button == sf::Mouse::Left)
+		if (event.type == sf::Event::MouseButtonReleased)
 		{
-			posDrop = interface.getPosBtn();
-			if (posDrop.getX() != 0 && posDrop.getY() != 0)
+			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				genererPanneau();
-				position = posDrop;
-			}
-			else
-			{
-				position = posInit;
-				setType(TypeElement::PANNEAU_BASE);
+				posDrop = interface.getPosBtn();
+				if (posDrop.getX() != 0 && posDrop.getY() != 0)
+				{
+					genererPanneau();
+					position = posDrop;
+				}
+				else
+				{
+					position = posInit;
+					setType(TypeElement::PANNEAU_BASE);
+				}
 			}
 		}
 	}
-	
 }
 
 void Panneau::reagirClic(sf::Event& event)
@@ -58,11 +59,6 @@ void Panneau::setCouleur(bool sourisDessus)
 	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
 }
-//
-//void Panneau::setType(TypeElement nouveauType)
-//{
-//	type = nouveauType;
-//}
 
 /*
 Bug collision Curseur -> panneaux :

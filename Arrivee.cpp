@@ -2,6 +2,7 @@
 
 Arrivee::Arrivee(Interface& interface_ptr, Coordonnees const& position_ptr) : ElementInterface{ "ressources/sprites/Arrivee.png" }, interface{interface_ptr}
 {
+	type = TypeElement::ARRIVEE;
 	position = position_ptr;
 }
 

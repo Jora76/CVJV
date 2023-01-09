@@ -18,6 +18,7 @@ void Jeu::demarrer()
 void Jeu::choisirEnigme()
 {
     if (compteur < 3) {
+       // compteur = 2;
         ++compteur;
     }
     else

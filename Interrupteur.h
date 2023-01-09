@@ -9,10 +9,11 @@ class Interrupteur :
 public:
 	explicit Interrupteur(Interface& interface_ptr, Coordonnees const& position_ptr);
 	Interface& interface;
-	//inline bool getOuvert() { return ouvert; };
-	/*
+	static inline bool getOuvert() { return ouvert; }
+	static inline void setOuvert() { ouvert = true; }
 private:
-	virtual void reagirCollision(TypeElement typeAutre) override;
-	static bool ouvert;*/
+	virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
+	static inline bool ouvert{ true };
+	sf::Clock dernierPassage;
 };
 

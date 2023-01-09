@@ -4,18 +4,18 @@
 #include "Coordonnees.h"
 //#include "Curseur.h" à ne pas décommenter sinon erreur
 
-enum class TypeElement { 
-	CURSEUR, 
-	OBSTACLE, 
-	INTERRUPTEUR, 
+enum class TypeElement {
+	CURSEUR,
+	OBSTACLE,
+	INTERRUPTEUR,
 	PANNEAU, 
 	PANNEAU_TOUCHE, 
 	PANNEAU_DRAG,
 	PANNEAU_BASE,
 	CHECKPOINT, 
 	CHECKPOINT_RECUPERE, 
-	TP, 
-	TP_BASE,
+	ARRIVEE,
+	TP,
 	BOUTON_GRILLE,
 	AUTRE
 };
