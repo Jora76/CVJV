@@ -4,6 +4,7 @@
 #include <string_view>
 #include <memory>
 #include <array>
+#include <iostream>
 #include "Coordonnees.h"
 #include "VarelaRound-Regular.h" //police
 //#inclu
@@ -15,9 +16,10 @@ public:
 	void setStyle(sf::Text& texte);
 	void defiler(sf::Text& texte);
 	void positionner();
-	//void ajouter(std::string& contenuTxt, sf::RenderWindow& window);
-	//void actualiserCompteurs(std::array <unsigned short int, 4>& compteurs);
-	void afficher(sf::Text& texte);
+	void ajouter(std::string& contenuTxt, Coordonnees& position);
+	void actualiserCompteurs(size_t i, std::string& contenu);
+	void afficher(/*sf::Text& texte*/);
+	void vider();
 private:
 	sf::Font police;
 	sf::Clock chrono;/*
@@ -26,6 +28,5 @@ private:
 	sf::RenderWindow& window;
 	unsigned short int caractere = 0;
 	//std::vector <sf::Text> textesDialogues;
-	//std::array <std::string, 5> compteursPanneaux;
-	//std::vector <sf::Text> textesInstance;
+	std::vector <sf::Text> textesCompteurs;
 };

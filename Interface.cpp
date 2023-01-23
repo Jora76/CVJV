@@ -1,5 +1,6 @@
 #include "Interface.h"
 
+using namespace std::string_literals;
 Interface::Interface()
 {
 }
@@ -223,9 +224,15 @@ void Interface::setComptPanneaux(size_t i, unsigned short int compt)
 void Interface::actualiserComptPanneau(unsigned short int terme, int typePanneau)
 {
 	compteursPanneaux[emplacementTypePanneau(typePanneau)] += terme;
-	for (auto& compteur : compteursPanneaux)
-		std::cout << "maj compt : " << compteur << std::endl;
-	std::cout << std::endl;
+}
+
+void Interface::mettre_A_Jour_Txt_ComptPanneau(GestionnaireTexte& texte)
+{
+	for (size_t i = 0; i < compteursPanneaux.size(); ++i)
+	{
+		std::string compt = "x0" + std::to_string(compteursPanneaux[i]);
+		texte.actualiserCompteurs(i, compt);
+	}
 }
 
 bool Interface::panneauDispo(float typePanneau)
@@ -241,6 +248,16 @@ void Interface::reinitialiserCompteurs()
 	}
 }
 
+void Interface::ajouterCompteurs(GestionnaireTexte& compteur)
+{
+	Coordonnees posCompt = { 192.f, 299.f };
+	for (auto& compteurPanneau : compteursPanneaux)
+	{
+		std::string compt = "x0" + std::to_string(compteurPanneau);
+		compteur.ajouter(compt, posCompt);
+		posCompt.setY(posCompt.getY() + 77.f);
+	}
+}
 /*
 	Regler répétition de code dans cette classe, c'est vraiment le bordel là.
 */

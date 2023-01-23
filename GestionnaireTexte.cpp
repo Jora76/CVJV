@@ -14,6 +14,7 @@ void GestionnaireTexte::setStyle(sf::Text& texte)
 {
 	texte.setFillColor(sf::Color::Green);
 	texte.setCharacterSize(20);
+	texte.setFont(police);
 	//defiler(texte);
 }
 
@@ -30,32 +31,38 @@ void GestionnaireTexte::defiler(sf::Text& texte)
 		}
 	}
 }
-//
-//void GestionnaireTexte::actualiserCompteurs(std::array <unsigned short int, 4>& compteurs)
-//{
-//	float x = 192.f;
-//	float y = 376.f;
-//	for (auto i = 0; i < compteurs.size(); ++i)
-//	{
-//		sf::Text compteur(("x0" + std::to_string(compteurs[i])), police);
-//		compteur.setString("x0" + std::to_string(compteurs[i]));
-//		compteur.setPosition(x, y);
-//		setStyle(compteur);
-//		afficher(compteur);
-//		y += 77.f;
-//	}
-//}
-//
-//void GestionnaireTexte::ajouter(std::string& contenuTxt, sf::RenderWindow& window)
-//{
-//	sf::Text texte;
-//	texte.setString(contenuTxt);
-//	textesInstance.push_back(texte);
-//}
 
-void GestionnaireTexte::afficher(sf::Text& texte)
+void GestionnaireTexte::actualiserCompteurs(size_t i, std::string& contenu)
 {
-	window.draw(texte);
+	textesCompteurs[i].setString(contenu);
+}
+
+void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position)
+{
+	sf::Text texte;
+	texte.setString(contenuTxt);
+	setStyle(texte);
+	texte.setPosition(position.getX(), position.getY());
+	textesCompteurs.push_back(texte);
+	
+	/*
+	for (auto& texte : textesInstance)
+	{
+		afficher(texte);
+	}*/
+}
+
+void GestionnaireTexte::afficher(/*sf::Text& texte*/)
+{
+	for (auto& texte : textesCompteurs)
+	{
+		window.draw(texte);
+	}
+}
+
+void GestionnaireTexte::vider()
+{
+	textesCompteurs.clear();
 }
 
 //finir transfert police ou remettre comme avant.

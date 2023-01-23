@@ -5,6 +5,7 @@
 
 #include "ElementInterface.h"
 #include "Bouton.h"
+#include "GestionnaireTexte.h"
 //#include "Curseur.h" //modif
 
 class Interface
@@ -31,6 +32,8 @@ public:
 	void setComptPanneaux(size_t i, unsigned short int compt);
 	void actualiserComptPanneau(unsigned short int terme, int typePanneau);
 	bool panneauDispo(float typePanneau);
+	void ajouterCompteurs(GestionnaireTexte& compteur);
+	void mettre_A_Jour_Txt_ComptPanneau(GestionnaireTexte& texte);
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};

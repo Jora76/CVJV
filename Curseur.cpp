@@ -13,6 +13,7 @@ void Curseur::mettreAJour(float temps) //methode qui calcule les déplacements du
 {
 	if (position.limiteGrille() == true)
 	{
+		interface.reinitialiserGrille();
 		resetPosition();
 	}
 	if(valider)
@@ -75,6 +76,7 @@ void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 		{
 		case TypeElement::OBSTACLE:
 			Interrupteur::setOuvert();
+			interface.reinitialiserGrille();
 			resetPosition();
 			break;
 

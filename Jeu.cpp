@@ -13,6 +13,7 @@ void Jeu::demarrer()
     interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
     interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
     enigme.generer(cheminEnigme);
+    interface.ajouterCompteurs(texte);
     instanceActuelle = Instance::ENIGME;
 }
 
@@ -44,12 +45,13 @@ void Jeu::choisirEnigme()
 //}
 
 void Jeu::gererTexte() //gerer tout court, pas juste texte
-{/*
+{
     switch (instanceActuelle)
     {
     case Instance::ENIGME:
-        texte.actualiserCompteurs(compteursPanneaux);
-    }*/
+        interface.mettre_A_Jour_Txt_ComptPanneau(texte);
+        texte.afficher();
+    }
 }
 
 //void Jeu::definirTexte(sf::Text& texte)
@@ -62,6 +64,7 @@ void Jeu::gererTexte() //gerer tout court, pas juste texte
 
 void Jeu::continuer()
 {
+    texte.vider();
     demarrer();
     interface.setContinuer();
 }
