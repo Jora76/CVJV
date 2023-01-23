@@ -1,10 +1,11 @@
 #include "Panneau.h"
 
-Panneau::Panneau(const Coordonnees& position_ptr, Interface& interface_ptr, std::string_view chemin) : Bouton{position, chemin }, interface{interface_ptr}
+Panneau::Panneau(const Coordonnees& position_ptr, Interface& interface_ptr,/* int qte,*/ /*std::array <unsigned short int, 5> tab_ptr,*/ std::string_view chemin) : Bouton{position, chemin }, interface{interface_ptr}
 {
 	type = TypeElement::AUTRE;
 	//posInit = position_ptr;
 	sprite.setScale(sprite.getScale().x, sprite.getScale().x);
+	//tab = tab_ptr;
 }
 
 void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
@@ -14,8 +15,11 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 		sf::Vector2f poSouris(event.mouseButton.x, event.mouseButton.y);
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			if (interface.dragAutre() == false)
+			if (interface.dragAutre() == false 
+				&& (type == TypeElement::PANNEAU || interface.panneauDispo(getTypePanneau()) == true))
 			{
+				if (type == TypeElement::PANNEAU_BASE)
+					interface.actualiserComptPanneau(-1, getTypePanneau());
 				setType(TypeElement::PANNEAU_DRAG);
 			}
 			if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
@@ -39,6 +43,7 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 				{
 					position = posInit;
 					setType(TypeElement::PANNEAU_BASE);
+					interface.actualiserComptPanneau(1, getTypePanneau());
 				}
 			}
 		}
@@ -59,6 +64,11 @@ void Panneau::setCouleur(bool sourisDessus)
 	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
 }
+//
+//void Panneau::setNombrePanneaux(float i)
+//{
+//
+//}
 
 /*
 Bug collision Curseur -> panneaux :

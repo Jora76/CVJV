@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include <array>
+
 #include "ElementInterface.h"
 #include "Bouton.h"
 //#include "Curseur.h" //modif
@@ -26,6 +28,10 @@ public:
 	inline bool getContinuer() { return continuer; };
 	inline void setContinuer() { continuer = false; };
 
+	void setComptPanneaux(size_t i, unsigned short int compt);
+	void actualiserComptPanneau(unsigned short int terme, int typePanneau);
+	bool panneauDispo(float typePanneau);
+
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};
 	std::vector<std::unique_ptr<ElementInterface>> aAjouter{};
@@ -35,4 +41,10 @@ private:
 	bool aVider = false;
 	bool continuer{ false }; 
 	Coordonnees positionBouton;
+
+	std::array <unsigned short int, 5> compteursPanneaux;
+	std::array <unsigned short int, 5> compteursPanneauxInit;
+	size_t emplacementTypePanneau(int typePanneau);
+
+	void reinitialiserCompteurs();
 };

@@ -1,25 +1,31 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+//#include "VarelaRound-Regular.h"
 #include "Interface.h"
 #include "Enigme.h"
 #include "Jeu.h"
+#include "GestionnaireTexte.h"
 
 constexpr int LONGUEUR_FENETRE{ 1280 };
 constexpr int HAUTEUR_FENETRE{ 720 };
 
 int main()
-{
+{/*
+    sf::Font police{};
+    police.loadFromMemory(data, data_length);*/
     sf::Event event;
     sf::RenderWindow window(sf::VideoMode(LONGUEUR_FENETRE, HAUTEUR_FENETRE), "CV Jeu-vidéo");
+    auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
     auto enigme = Enigme{interface};
-    auto jeu = Jeu{interface, enigme};
+    auto jeu = Jeu{interface, enigme, texte};
     jeu.demarrer();
 
 
     while (window.isOpen())
     {
+        window.setFramerateLimit(60);
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -31,10 +37,10 @@ int main()
         interface.actualiser();
         window.clear();
         interface.afficher(window);
-        jeu.afficherTexte(window);
         jeu.actualiser();
+        jeu.gererTexte();
         window.display();
-        interface.nettoyer(); 
+        interface.nettoyer();
     }
 
     return 0;
@@ -50,8 +56,7 @@ int main()
 - gestion des erreurs et exceptions
 - sound design
 - animations de certains sprites
-*/
-/*
+
 ---------------------------------------GITHUB-------------------------------------------------
 
 Afficher terminal VS : ctrl + ù

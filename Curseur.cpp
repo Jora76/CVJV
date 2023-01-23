@@ -1,6 +1,6 @@
 #include "Curseur.h"
 
-#include<iostream>
+#include <iostream>
 
 Curseur::Curseur(Interface& interface_ptr, Coordonnees const& position_ptr) : Bouton{position, "ressources/sprites/Curseur.png" }, interface {interface_ptr}
 {
@@ -17,7 +17,7 @@ void Curseur::mettreAJour(float temps) //methode qui calcule les déplacements du
 	}
 	if(valider)
 	{
-		vitesse += Vecteur::creerDepuisAngle(ACCELERATION * temps, sprite.getRotation());
+		vitesse = Vecteur::creerDepuisAngle(sprite.getRotation());
 	}
 	else
 	{

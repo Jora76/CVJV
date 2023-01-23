@@ -165,6 +165,7 @@ void Interface::viderGrille()
 			bouton->supprimerPanneau();
 		}
 	}
+	reinitialiserCompteurs();
 }
 
 bool Interface::dragAutre()
@@ -186,6 +187,58 @@ void Interface::vider()
 {
 	aVider = true;
 	continuer = true;
+}
+
+size_t Interface::emplacementTypePanneau(int typePanneau)
+{
+	switch (typePanneau)
+	{
+	case 0:
+		return 0;
+		break;
+	case 180:
+		return 1;
+		break;
+	case 270:
+		return 2;
+		break;
+	case 90:
+		return 3;
+		break;
+	case -1:
+		return 4;
+		break;
+	default:
+		return 3;
+		break;
+	}
+}
+
+void Interface::setComptPanneaux(size_t i, unsigned short int compt)
+{
+	compteursPanneaux[i] = compt;
+	compteursPanneauxInit[i] = compt;
+}
+
+void Interface::actualiserComptPanneau(unsigned short int terme, int typePanneau)
+{
+	compteursPanneaux[emplacementTypePanneau(typePanneau)] += terme;
+	for (auto& compteur : compteursPanneaux)
+		std::cout << "maj compt : " << compteur << std::endl;
+	std::cout << std::endl;
+}
+
+bool Interface::panneauDispo(float typePanneau)
+{
+	return compteursPanneaux[emplacementTypePanneau(typePanneau)] != 0;
+}
+
+void Interface::reinitialiserCompteurs()
+{
+	for (auto i = 0; i < compteursPanneaux.size(); ++i)
+	{
+		compteursPanneaux[i] = compteursPanneauxInit[i];
+	}
 }
 
 /*

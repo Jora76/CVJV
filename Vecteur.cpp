@@ -4,17 +4,10 @@
 
 #include "Vecteur.h"
 
-Vecteur Vecteur::creerDepuisAngle(float taille, float angleEnDegre) //vecteur qui va faire avancer le vaisseau en fonction de son angle de rotation
+Vecteur Vecteur::creerDepuisAngle(float angleEnDegre) //vecteur qui va faire avancer le vaisseau en fonction de son angle de rotation
 {
-	float regulateurVitesse = 100;
-	Vecteur vitesseMax;
-	if (taille > regulateurVitesse)
-		return vitesseMax;
-	else
-	{
-		vitesseMax = { taille * cos(angleEnDegre / 180.f * static_cast<float>(M_PI)), taille * sin(angleEnDegre / 180.f * static_cast<float>(M_PI)) };
-		return vitesseMax;
-	}
+	return { 150.f * cos(angleEnDegre / 180.f * static_cast<float>(M_PI)), 150.f * sin(angleEnDegre / 180.f * static_cast<float>(M_PI)) };
+
 	// corriger vitesse, retirer acceleration et garder vitesse constante
 }
 

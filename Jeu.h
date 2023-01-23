@@ -11,29 +11,43 @@
 #include "Enigme.h"
 #include "GestionnaireRessources.h"
 #include "Curseur.h"
+#include "GestionnaireTexte.h"
+
+enum class Instance
+{
+	MENU,
+	DIALOGUE,
+	ENIGME,
+};
 
 class Jeu
 {
 public :
-	Jeu(Interface& interface_ptr, Enigme& enigme_ptr);
+	Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_ptr);
 	void demarrer();
-	void afficherTexte(sf::RenderWindow& fenetre);
+	//void afficherTexte(sf::RenderWindow& fenetre);
 	void actualiser();
 	void terminer();
+	void gererTexte();
+	//void actualiserComptPanneaux()
 
 private:
 	Interface& interface;
 	Enigme &enigme;
+	GestionnaireTexte& texte;
 	bool enCours{ false };
 	short unsigned int compteur{ 0 };
 	std::string cheminFenetre;
 	std::string cheminEnigme;
-	sf::Font police{};
+	//sf::Font police{};
+	
 	//std::unique_ptr<sf::Text> texteObjectif{ nullptr };
 
 	void choisirEnigme();
-	void definirTexte(sf::Text& texte);
+	//void definirTexte(sf::Text& texte);
 	void retirerTexte();
 	void continuer();
+
+	Instance instanceActuelle;
 };
 

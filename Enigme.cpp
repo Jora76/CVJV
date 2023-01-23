@@ -35,7 +35,6 @@ void Enigme::generer(std::string_view const& chemin)
 			position.setY(grille[2]);
 			Coordonnees::initialiserGrille(position.getX(), position.getY());
 			break;
-		//case qtePanneaux:
 			
 		case comp:
 			++grille_Iter;
@@ -82,6 +81,7 @@ void Enigme::generer(std::string_view const& chemin)
 	position.setX(grille[3]);
 	position.setY(grille[4]);
 	interface.ajouterBouton(std::make_unique<Curseur>(interface, position));
+
 	// 152 296 -> 373 -> 451
 	auto posPanneauY = 316;
 	auto angle = 0.f;
@@ -90,7 +90,8 @@ void Enigme::generer(std::string_view const& chemin)
 	for (auto i = 0; i < 4; ++i)
 	{
 		//if(i < 4)
-		interface.ajouterBouton(std::make_unique<PanneauDirection>(position, angle, interface));
+		//auto nbPanneau = getCompt(angle);
+		interface.ajouterBouton(std::make_unique<PanneauDirection>(position, angle, /* int qte,*/interface));
 		if (i == 0 || i == 2)
 			angle += 180;
 		else
@@ -101,6 +102,14 @@ void Enigme::generer(std::string_view const& chemin)
 		position.setY(posPanneauY);
 	}
 	interface.ajouterBouton(std::make_unique<Teleporteur>(position, interface));
+
+// initialisation des compteurs de panneaux
+
+	for (auto i = 0; i < 5; ++i)
+	{
+		interface.setComptPanneaux(i, grille[i + 5]);
+	}
+
 	grille.clear();
 }
 

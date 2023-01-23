@@ -1,6 +1,6 @@
 #include "Teleporteur.h"
 
-Teleporteur::Teleporteur(const Coordonnees& position_ptr, Interface& interface_ptr) : Panneau{ position, interface_ptr, "ressources/sprites/Mur_vert.png" }/*, interface{interface_ptr}*/
+Teleporteur::Teleporteur(const Coordonnees& position_ptr, /*std::array <unsigned short int, 5> tab_ptr,*/ Interface& interface_ptr) : Panneau{ position, interface_ptr, /*tab_ptr,*/ "ressources/sprites/Mur_vert.png" }
 {
 	type = TypeElement::PANNEAU_BASE;
 	posInit = position_ptr;
@@ -22,4 +22,9 @@ void Teleporteur::genererPanneau()
 {
 	interface.ajouterBouton(std::make_unique<Teleporteur>(posInit, interface));
 	type = TypeElement::TP;
+}
+
+float Teleporteur::getTypePanneau()
+{
+	return -1.f;
 }
