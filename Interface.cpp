@@ -250,11 +250,11 @@ void Interface::reinitialiserCompteurs()
 
 void Interface::ajouterCompteurs(GestionnaireTexte& compteur)
 {
-	Coordonnees posCompt = { 192.f, 299.f };
+	Coordonnees posCompt = { 202.f, 302.f };
 	for (auto& compteurPanneau : compteursPanneaux)
 	{
 		std::string compt = "x0" + std::to_string(compteurPanneau);
-		compteur.ajouter(compt, posCompt);
+		compteur.ajouter(compt, posCompt, 0);
 		posCompt.setY(posCompt.getY() + 77.f);
 	}
 }

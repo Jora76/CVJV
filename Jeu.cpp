@@ -13,8 +13,8 @@ void Jeu::demarrer()
     interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
     interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
     enigme.generer(cheminEnigme);
-    interface.ajouterCompteurs(texte);
     instanceActuelle = Instance::ENIGME;
+    initTexte();
 }
 
 void Jeu::choisirEnigme()
@@ -29,21 +29,6 @@ void Jeu::choisirEnigme()
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
 
-//void Jeu::afficherTexte(sf::RenderWindow& fenetre)
-//{
-//    police.loadFromMemory(data, data_length);
-//
-//    sf::Text texteObjectif("Objectif : Ramassez tous les checkpoints !", police);
-//    sf::Text texteConsigne("Placez les panneaux de manière à emmener le curseur vers l'arrivée.", police, 20);
-//
-//    texteConsigne.setPosition(172, 135);
-//    //definirTexte(texteObjectif);
-//    texte.setStyle(texteConsigne);
-//    texte.setStyle(texteObjectif);
-//    fenetre.draw(texteObjectif);
-//    fenetre.draw(texteConsigne);
-//}
-
 void Jeu::gererTexte() //gerer tout court, pas juste texte
 {
     switch (instanceActuelle)
@@ -54,13 +39,6 @@ void Jeu::gererTexte() //gerer tout court, pas juste texte
     }
 }
 
-//void Jeu::definirTexte(sf::Text& texte)
-//{
-//    texte.setFillColor(sf::Color::Green);
-//    texte.setFont(police);
-//    texte.setCharacterSize(20);
-//    texte.setPosition(172, 85);
-//}
 
 void Jeu::continuer()
 {
@@ -77,12 +55,18 @@ void Jeu::actualiser()
     }
 }
 
-void Jeu::retirerTexte()
+void Jeu::initTexte()
 {
-
+    switch (instanceActuelle)
+    {
+    case Instance::ENIGME:
+        texte.ajouter(texteConsigne, posTxtConsigne, 1);
+        texte.ajouter(texteObjectif, posTxtObjectif, 1);
+        interface.ajouterCompteurs(texte);
+    }
 }
+
 void Jeu::terminer()
 {
     interface.vider();
-    //retirerTexte();
 }

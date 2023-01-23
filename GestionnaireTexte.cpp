@@ -1,10 +1,5 @@
 #include "GestionnaireTexte.h"
 
-//GestionnaireTexte::GestionnaireTexte(std::string& contenu_ptr, Coordonnees& position_ptr) : contenu{ contenu_ptr }, position { position_ptr }
-//{
-//	police.loadFromMemory(data, data_length);
-//}
-
 GestionnaireTexte::GestionnaireTexte(sf::RenderWindow& window_ptr) : window{window_ptr}
 {
 	police.loadFromMemory(data, data_length);
@@ -37,24 +32,31 @@ void GestionnaireTexte::actualiserCompteurs(size_t i, std::string& contenu)
 	textesCompteurs[i].setString(contenu);
 }
 
-void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position)
+void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte)
 {
 	sf::Text texte;
 	texte.setString(contenuTxt);
 	setStyle(texte);
 	texte.setPosition(position.getX(), position.getY());
-	textesCompteurs.push_back(texte);
-	
-	/*
-	for (auto& texte : textesInstance)
+
+	switch (typeTexte)
 	{
-		afficher(texte);
-	}*/
+	case TypeTexte::COMPTEUR:
+		textesCompteurs.push_back(texte);
+		break;
+	case TypeTexte::INSTRUCTION :
+		textesInstruction.push_back(texte);
+		break;
+	}
 }
 
-void GestionnaireTexte::afficher(/*sf::Text& texte*/)
+void GestionnaireTexte::afficher()
 {
 	for (auto& texte : textesCompteurs)
+	{
+		window.draw(texte);
+	}
+	for (auto& texte : textesInstruction)
 	{
 		window.draw(texte);
 	}
@@ -63,8 +65,6 @@ void GestionnaireTexte::afficher(/*sf::Text& texte*/)
 void GestionnaireTexte::vider()
 {
 	textesCompteurs.clear();
+	textesInstruction.clear();
 }
 
-//finir transfert police ou remettre comme avant.
-//actualiserCompteurs finalement ce serait peut être mieux dans jeu comme ça
-//gestionnaire texte s'occupe réellement que des textes et ça peut peut etre débloquer le truc avec ajouter
