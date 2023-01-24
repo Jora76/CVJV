@@ -12,7 +12,8 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 {
 	if (!valider)
 	{
-		sf::Vector2f poSouris(event.mouseButton.x, event.mouseButton.y);
+		sf::Vector2f ratio = { window.getSize().x / 1280.f, window.getSize().y / 720.f };
+
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
 			if (interface.dragAutre() == false 
@@ -24,11 +25,11 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 			}
 			if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
 			{
-				position = { static_cast <float>(sf::Mouse::getPosition(window).x),
-					   static_cast <float>(sf::Mouse::getPosition(window).y) };
+				position = { static_cast <float>(sf::Mouse::getPosition(window).x / ratio.x),
+							 static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
+
 			}
 		}
-
 		if (event.type == sf::Event::MouseButtonReleased)
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
@@ -47,6 +48,7 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 				}
 			}
 		}
+		
 	}
 }
 

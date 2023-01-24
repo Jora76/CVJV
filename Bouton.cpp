@@ -9,8 +9,10 @@ Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : Eleme
 
 bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
 {
-	float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x);
-	float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y);
+	sf::Vector2f ratio = { window.getSize().x / 1280.f, window.getSize().y / 720.f };
+
+	float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x) / ratio.x;
+	float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y) / ratio.y;
 
 	float btnxPosWidht = sprite.getPosition().x + sprite.getGlobalBounds().width / 2;
 	float btnyPosHeight = sprite.getPosition().y + sprite.getGlobalBounds().height / 2;
@@ -44,15 +46,13 @@ void Bouton::supprimerPanneau()
 	supprimer = true;
 }
 
-/*
--------------------------
-----------------------------------------------------------------------------------------			
-			*/
-/*
+
+/*----------------------------------------------------------------------------------------
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		reagirClic();*/
+		reagirClic();
 		
-/*
+
 	 à corriger : (réglé)
 		- faire toutes les réactions au clic
 

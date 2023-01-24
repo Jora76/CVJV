@@ -1,20 +1,18 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-//#include "VarelaRound-Regular.h"
 #include "Interface.h"
 #include "Enigme.h"
 #include "Jeu.h"
 #include "GestionnaireTexte.h"
 
-constexpr int LONGUEUR_FENETRE{ 1280 };
-constexpr int HAUTEUR_FENETRE{ 720 };
+constexpr int LONGUEUR_FENETRE{ 1920 };
+constexpr int HAUTEUR_FENETRE{ 1080 };
 
 int main()
-{/*
-    sf::Font police{};
-    police.loadFromMemory(data, data_length);*/
+{
     sf::Event event;
+    sf::View view (sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280, 720));
     sf::RenderWindow window(sf::VideoMode(LONGUEUR_FENETRE, HAUTEUR_FENETRE), "CV Jeu-vidéo");
     auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
@@ -31,7 +29,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        //window.setKeyRepeatEnabled(false);
+        window.setView(view);
+        view.setCenter(640.f, 360.f);
+        window.setKeyRepeatEnabled(false);
         interface.positionner();
         interface.gererSouris(event, window);
         interface.actualiser();
@@ -48,9 +48,8 @@ int main()
 
 /*Reste à faire :
 
-- mini histoire avec lignes de dialogue
+- mini histoire avec lignes de dialogue (en cours)
 - création classe jeu qui va gerer le déroulement de la partie (en cours)
-- terminer les réactions aux collisions
 - coder les textes (en cours)
 - coder les boutons (en cours)
 - gestion des erreurs et exceptions
@@ -73,5 +72,7 @@ Recuperer projet :
     - git status
     - git fetch
     - git pull
+
+---------------------------------------------------------------------------------------------
 */
 
