@@ -4,7 +4,6 @@
 #include <memory>
 #include <string>
 
-//#include "Interface.h"
 #include "Fenetre.h"
 #include "BoutonValider.h"
 #include "BoutonSupprimer.h"

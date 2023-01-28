@@ -11,7 +11,6 @@ class Curseur : public Bouton
 {
 public:
 	explicit Curseur(Interface& interface_ptr, Coordonnees const& position_ptr);
-	//virtual void testerCollision(ElementInterface& autre) override;
 	
 private:
 	//Méthodes
@@ -29,7 +28,6 @@ private:
 	Coordonnees posInit{};
 	sf::Clock chrono;
 	sf::Clock dernierClic;
-	//float test;
 
 	static constexpr float ACCELERATION{ 250.f };
 };

@@ -7,8 +7,6 @@
 Vecteur Vecteur::creerDepuisAngle(float angleEnDegre) //vecteur qui va faire avancer le vaisseau en fonction de son angle de rotation
 {
 	return { 150.f * cos(angleEnDegre / 180.f * static_cast<float>(M_PI)), 150.f * sin(angleEnDegre / 180.f * static_cast<float>(M_PI)) };
-
-	// corriger vitesse, retirer acceleration et garder vitesse constante
 }
 
 void Vecteur::operator+=(Vecteur const& autre)

@@ -1,6 +1,6 @@
 #include "Bouton.h"
 
-bool Bouton::valider = false;
+bool ElementInterface::valider = false;
 
 Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : ElementInterface {chemin}
 {
@@ -9,16 +9,6 @@ Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : Eleme
 
 bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view)
 {
-	//sf::Vector2f ratioFenetreView = { window.getSize().x / view.getSize().x, window.getSize().y / view.getSize().y };
-	//float ratioFenetre = window.getSize().x / window.getSize().y;
-	//sf::Vector2f ratioView = { float(sf::VideoMode::getDesktopMode().width / (sf::VideoMode::getDesktopMode().width / window.getSize().x)), float(sf::VideoMode::getDesktopMode().height / (sf::VideoMode::getDesktopMode().height / window.getSize().y)) };
-	////sf::Vector2f test = { window.getSize().x / (window.getSize().x / 1.5f), window.getSize().y / (window.getSize().y / 1.5f) };
-	//sf::Vector2f ratio = { float(window.getSize().x / (sf::VideoMode::getDesktopMode().width * 1.5f)), float(window.getSize().y / (sf::VideoMode::getDesktopMode().height * 1.5f))};
-	////sf::Vector2f ratio = { float(window.getSize().x / (window.getSize().x / ratioFenetreView.x ) / ratioFenetre * ratioView.x), float(window.getSize().y / (window.getSize().y / ratioFenetreView.y) / ratioFenetre * ratioView.y) };
-
-	//float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x) / ratio.x;
-	//float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y) / ratio.y;
-
 	sf::Vector2i posSouris = sf::Mouse::getPosition(window);
 	sf::Vector2f sourisGlobalPos = window.mapPixelToCoords(posSouris, view);
 
@@ -28,13 +18,10 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::Vie
 	float btnxPosReelle = sprite.getPosition().x - sprite.getGlobalBounds().width / 2;
 	float btnyPosReelle = sprite.getPosition().y - sprite.getGlobalBounds().height / 2;
 
-	//std::cout << "Pos reelle : " << sf::Mouse::getPosition(window).x << ", " << sf::Mouse::getPosition(window).y << std::endl;
-	std::cout << "Fenetre : " << window.getSize().x << ", " << window.getSize().y << std::endl;
-
 	if ((sourisGlobalPos.x < btnxPosWidht && sourisGlobalPos.x > btnxPosReelle && sourisGlobalPos.y < btnyPosHeight && sourisGlobalPos.y > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
 	{
 		setCouleur(true);
-		testerClic(event, window);
+		testerClic(event, window, view);
 		return true;
 	}
 	else
@@ -44,7 +31,7 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::Vie
 	}
 }
 
-void Bouton::testerClic(sf::Event& event, sf::RenderWindow& window)
+void Bouton::testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
@@ -59,10 +46,6 @@ void Bouton::supprimerPanneau()
 
 
 /*----------------------------------------------------------------------------------------
-
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		reagirClic();
-		
 
 	 à corriger : (réglé)
 		- faire toutes les réactions au clic

@@ -6,9 +6,6 @@
 #include "Jeu.h"
 #include "GestionnaireTexte.h"
 
-//constexpr float LONGUEUR_FENETRE{ 1920 };
-//constexpr float HAUTEUR_FENETRE{ 1080 };
-
 void redimentionnerView(sf::RenderWindow& window, sf::View& view)
 {
     float windowRatio = float(window.getSize().x) / float(window.getSize().y);
@@ -31,7 +28,6 @@ void redimentionnerView(sf::RenderWindow& window, sf::View& view)
         viewport.left = (1.f - viewport.width) / 2.f;
         viewport.top = 0.f;
     }
-    //std::cout << view.getViewport().height << ", " << view.getViewport().width;
     view.setViewport(viewport);
 }
 

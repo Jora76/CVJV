@@ -10,8 +10,7 @@ class Faille :
 public:
 	explicit Faille(Interface& interface_ptr, Coordonnees const& position_ptr);
 
-private:/*
-	virtual void reagirCollision(TypeElement typeAutre) override;*/
+private:
 	Interface& interface;
 	virtual void actualiser() override;
 };

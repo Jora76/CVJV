@@ -8,7 +8,6 @@ class Bouton :
 public:
     Bouton(Coordonnees const& position_ptr, std::string_view chemin);
     bool sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view);
-    //void sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
     static inline bool aSupprimer(std::unique_ptr<Bouton>& bouton) { return bouton->supprimer; };
     inline bool getValider() { return valider; };
     inline Coordonnees getPos() { return position; };
@@ -18,8 +17,7 @@ protected:
     bool selection{ false };
     bool supprimer{ false };
     virtual void setCouleur(bool sourisDessus) = 0;
-    virtual void testerClic(sf::Event& event, sf::RenderWindow& window);
-    //sf::Event event{};
+    virtual void testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view);
 private:
 };
 

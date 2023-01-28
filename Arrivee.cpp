@@ -21,13 +21,3 @@ void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
 		valider = false;
 	}
 }
-
-/*
-void Arrivee::compterCheckpoint()
-{
-	++ checkPointsRecuperes;
-}
-
-/*
-	Objectif : lier comptage de checkpoints entre Arrivee, Jeu et CheckPoint.
-*/

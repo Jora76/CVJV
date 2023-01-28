@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Coordonnees.h"
-//#include "Curseur.h" à ne pas décommenter sinon erreur
 
 enum class TypeElement {
 	CURSEUR,

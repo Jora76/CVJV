@@ -106,7 +106,6 @@ void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window, sf::View
 			else if(bouton->getType() != TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window, view) == true)
 			{
 				positionBouton = { 0.f, 0.f };
-				//bouton->sourisEstDessus(event, window);
 			}
 		}
 	}

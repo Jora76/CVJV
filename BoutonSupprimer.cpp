@@ -10,7 +10,8 @@ BoutonSupprimer::BoutonSupprimer(Interface& interface_ptr) : Bouton(position, "r
 
 void BoutonSupprimer::reagirClic(sf::Event& event)
 {
-	interface.viderGrille();
+	if(!valider)
+		interface.viderGrille();
 }
 
 void BoutonSupprimer::setCouleur(bool sourisDessus)

@@ -6,7 +6,6 @@
 #include "ElementInterface.h"
 #include "Bouton.h"
 #include "GestionnaireTexte.h"
-//#include "Curseur.h" //modif
 
 class Interface
 {

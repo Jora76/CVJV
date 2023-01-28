@@ -68,9 +68,7 @@ void Enigme::generer(std::string_view const& chemin)
 					position.setFinGrilleX(position.getX());
 					position.setX(grille[1] - OFFSET);
 					position.setY(OFFSET);
-					break;/*
-				case fin:
-					position.setFinGrilleY(position.getY());*/
+					break;
 				}
 				position.setX(OFFSET);
 			}
@@ -89,9 +87,7 @@ void Enigme::generer(std::string_view const& chemin)
 	position.setY(posPanneauY); // pas celui la par contre
 	for (auto i = 0; i < 4; ++i)
 	{
-		//if(i < 4)
-		//auto nbPanneau = getCompt(angle);
-		interface.ajouterBouton(std::make_unique<PanneauDirection>(position, angle, /* int qte,*/interface));
+		interface.ajouterBouton(std::make_unique<PanneauDirection>(position, angle, interface));
 		if (i == 0 || i == 2)
 			angle += 180;
 		else

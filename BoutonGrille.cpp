@@ -1,6 +1,5 @@
 #include "BoutonGrille.h"
 #include "Bouton.h"
-//#include "Obstacle.h"
 #include "Panneau.h"
 
 BoutonGrille::BoutonGrille(Interface& interface_ptr, Coordonnees const& position_ptr) : Bouton{position, "ressources/sprites/Bouton_grille.png" }, interface{interface_ptr}

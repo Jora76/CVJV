@@ -1,22 +1,11 @@
 #include "Teleporteur.h"
 
-Teleporteur::Teleporteur(const Coordonnees& position_ptr, /*std::array <unsigned short int, 5> tab_ptr,*/ Interface& interface_ptr) : Panneau{ position, interface_ptr, /*tab_ptr,*/ "ressources/sprites/Mur_vert.png" }
+Teleporteur::Teleporteur(const Coordonnees& position_ptr, Interface& interface_ptr) : Panneau{ position, interface_ptr, "ressources/sprites/Mur_vert.png" }
 {
 	type = TypeElement::PANNEAU_BASE;
 	posInit = position_ptr;
 	position = position_ptr;
 }
-
-
-//void Teleporteur::reagirCollision(TypeElement typeAutre, float angle)
-//{
-//	if (typeAutre == TypeElement::CURSEUR)
-//		sprite.setColor(sf::Color::Color(0, 255, 0, 0));
-//}/*
-/*void Teleporteur::setCouleur(bool sourisDessus)
-{
-	sprite.setColor(sf::Color::Color(0, 255, 0, 255));
-}*/
 
 void Teleporteur::genererPanneau()
 {
