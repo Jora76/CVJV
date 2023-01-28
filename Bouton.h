@@ -7,7 +7,7 @@ class Bouton :
 {
 public:
     Bouton(Coordonnees const& position_ptr, std::string_view chemin);
-    bool sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
+    bool sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view);
     //void sourisEstDessus(sf::Event& event, sf::RenderWindow& window);
     static inline bool aSupprimer(std::unique_ptr<Bouton>& bouton) { return bouton->supprimer; };
     inline bool getValider() { return valider; };

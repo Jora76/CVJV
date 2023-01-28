@@ -6,12 +6,11 @@
 #include "Jeu.h"
 #include "GestionnaireTexte.h"
 
-constexpr float LONGUEUR_FENETRE{ 1920 };
-constexpr float HAUTEUR_FENETRE{ 1080 };
+//constexpr float LONGUEUR_FENETRE{ 1920 };
+//constexpr float HAUTEUR_FENETRE{ 1080 };
 
 void redimentionnerView(sf::RenderWindow& window, sf::View& view)
 {
-    double ratioBase = LONGUEUR_FENETRE / HAUTEUR_FENETRE;
     float windowRatio = float(window.getSize().x) / float(window.getSize().y);
     float viewRatio = 1280.f / 720.f;
 
@@ -32,7 +31,7 @@ void redimentionnerView(sf::RenderWindow& window, sf::View& view)
         viewport.left = (1.f - viewport.width) / 2.f;
         viewport.top = 0.f;
     }
-
+    //std::cout << view.getViewport().height << ", " << view.getViewport().width;
     view.setViewport(viewport);
 }
 
@@ -40,7 +39,7 @@ int main()
 {
     sf::Event event;
     sf::View view (sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280, 720));
-    sf::RenderWindow window(sf::VideoMode(LONGUEUR_FENETRE, HAUTEUR_FENETRE), "CV Jeu-vidéo");
+    sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), "CV Jeu-vidéo");
     auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
     auto enigme = Enigme{interface};
@@ -62,7 +61,7 @@ int main()
         view.setCenter(640.f, 360.f);
         window.setKeyRepeatEnabled(false);
         interface.positionner();
-        interface.gererSouris(event, window);
+        interface.gererSouris(event, window, view);
         interface.actualiser();
         window.clear();
         interface.afficher(window);

@@ -17,7 +17,7 @@ public:
 	void positionner();
 	void afficher(sf::RenderWindow& window) const;
 	void gererCollisions(ElementInterface* curseur);
-	void gererSouris(sf::Event& event, sf::RenderWindow& window);
+	void gererSouris(sf::Event& event, sf::RenderWindow& window, sf::View& view);
 	void nettoyer();
 	void actualiser();
 	bool verifierCheckPoints();
@@ -44,7 +44,6 @@ private:
 	bool aVider = false;
 	bool continuer{ false }; 
 	Coordonnees positionBouton;
-
 	std::array <unsigned short int, 5> compteursPanneaux;
 	std::array <unsigned short int, 5> compteursPanneauxInit;
 	size_t emplacementTypePanneau(int typePanneau);

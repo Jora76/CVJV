@@ -93,17 +93,17 @@ void Interface::gererCollisions(ElementInterface* curseur)
 *	- reactions clics des boutons (curseur, panneaux, boutons, boutons grille)
 */
 
-void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window)
+void Interface::gererSouris(sf::Event& event, sf::RenderWindow& window, sf::View& view)
 {
 	if (sf::Event::MouseMoved)
 	{
 		for (auto& bouton : boutons)
 		{
-			if (bouton->getType() == TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
+			if (bouton->getType() == TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window, view) == true)
 			{
 				positionBouton = bouton->getPos();
 			}
-			else if(bouton->getType() != TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window) == true)
+			else if(bouton->getType() != TypeElement::BOUTON_GRILLE && bouton->sourisEstDessus(event, window, view) == true)
 			{
 				positionBouton = { 0.f, 0.f };
 				//bouton->sourisEstDessus(event, window);

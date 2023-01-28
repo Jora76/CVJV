@@ -7,12 +7,20 @@ Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : Eleme
 	type = TypeElement::AUTRE;
 }
 
-bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
+bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view)
 {
-	sf::Vector2f ratio = { window.getSize().x / 1280.f, window.getSize().y / 720.f };
+	//sf::Vector2f ratioFenetreView = { window.getSize().x / view.getSize().x, window.getSize().y / view.getSize().y };
+	//float ratioFenetre = window.getSize().x / window.getSize().y;
+	//sf::Vector2f ratioView = { float(sf::VideoMode::getDesktopMode().width / (sf::VideoMode::getDesktopMode().width / window.getSize().x)), float(sf::VideoMode::getDesktopMode().height / (sf::VideoMode::getDesktopMode().height / window.getSize().y)) };
+	////sf::Vector2f test = { window.getSize().x / (window.getSize().x / 1.5f), window.getSize().y / (window.getSize().y / 1.5f) };
+	//sf::Vector2f ratio = { float(window.getSize().x / (sf::VideoMode::getDesktopMode().width * 1.5f)), float(window.getSize().y / (sf::VideoMode::getDesktopMode().height * 1.5f))};
+	////sf::Vector2f ratio = { float(window.getSize().x / (window.getSize().x / ratioFenetreView.x ) / ratioFenetre * ratioView.x), float(window.getSize().y / (window.getSize().y / ratioFenetreView.y) / ratioFenetre * ratioView.y) };
 
-	float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x) / ratio.x;
-	float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y) / ratio.y;
+	//float sourisX = static_cast <float>(sf::Mouse::getPosition(window).x) / ratio.x;
+	//float sourisY = static_cast <float>(sf::Mouse::getPosition(window).y) / ratio.y;
+
+	sf::Vector2i posSouris = sf::Mouse::getPosition(window);
+	sf::Vector2f sourisGlobalPos = window.mapPixelToCoords(posSouris, view);
 
 	float btnxPosWidht = sprite.getPosition().x + sprite.getGlobalBounds().width / 2;
 	float btnyPosHeight = sprite.getPosition().y + sprite.getGlobalBounds().height / 2;
@@ -20,7 +28,10 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window)
 	float btnxPosReelle = sprite.getPosition().x - sprite.getGlobalBounds().width / 2;
 	float btnyPosReelle = sprite.getPosition().y - sprite.getGlobalBounds().height / 2;
 
-	if ((sourisX < btnxPosWidht && sourisX > btnxPosReelle && sourisY < btnyPosHeight && sourisY > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
+	//std::cout << "Pos reelle : " << sf::Mouse::getPosition(window).x << ", " << sf::Mouse::getPosition(window).y << std::endl;
+	std::cout << "Fenetre : " << window.getSize().x << ", " << window.getSize().y << std::endl;
+
+	if ((sourisGlobalPos.x < btnxPosWidht && sourisGlobalPos.x > btnxPosReelle && sourisGlobalPos.y < btnyPosHeight && sourisGlobalPos.y > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
 	{
 		setCouleur(true);
 		testerClic(event, window);
