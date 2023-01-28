@@ -14,6 +14,8 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 	{
 		sf::Vector2f ratio = { window.getSize().x / 1280.f, window.getSize().y / 720.f };
 
+		//Drag
+
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
 			if (interface.dragAutre() == false 
@@ -23,32 +25,52 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 					interface.actualiserComptPanneau(-1, getTypePanneau());
 				setType(TypeElement::PANNEAU_DRAG);
 			}
+
 			if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
 			{
 				position = { static_cast <float>(sf::Mouse::getPosition(window).x / ratio.x),
-							 static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
-
+							static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
 			}
+
 		}
+
+		//Drop
+
+		Coordonnees posSouris = { static_cast <float>(sf::Mouse::getPosition(window).x / ratio.x),
+								  static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
+
+		if (type == TypeElement::PANNEAU_DRAG && position != posSouris)
+		{
+			drop();
+		}
+
 		if (event.type == sf::Event::MouseButtonReleased)
 		{
 			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				posDrop = interface.getPosBtn();
-				if (posDrop.getX() != 0 && posDrop.getY() != 0)
+				if (type == TypeElement::PANNEAU_DRAG)
 				{
-					genererPanneau();
-					position = posDrop;
-				}
-				else
-				{
-					position = posInit;
-					setType(TypeElement::PANNEAU_BASE);
-					interface.actualiserComptPanneau(1, getTypePanneau());
+					drop();
 				}
 			}
 		}
 		
+	}
+}
+
+void Panneau::drop()
+{
+	posDrop = interface.getPosBtn();
+	if (posDrop.getX() != 0 && posDrop.getY() != 0)
+	{
+		genererPanneau();
+		position = posDrop;
+	}
+	else
+	{
+		position = posInit;
+		setType(TypeElement::PANNEAU_BASE);
+		interface.actualiserComptPanneau(1, getTypePanneau());
 	}
 }
 

@@ -30,6 +30,13 @@ void Coordonnees::operator+=(Vecteur const& pos)
 
 }
 
+bool Coordonnees::operator!=(Coordonnees const& pos)
+{
+	if (x != pos.x && y != pos.y)
+		return true;
+	return false;
+}
+
 void Coordonnees::initialiserGrille(int lx, int ly)
 {
 	if (grilleX != 0 || grilleY != 0)

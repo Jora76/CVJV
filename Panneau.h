@@ -21,6 +21,7 @@ private:
     virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
     virtual void setCouleur(bool sourisDessus) override;
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window) override;
+    void drop();
     
     //std::array <unsigned short int, 5>& tab;
 };

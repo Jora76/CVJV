@@ -6,8 +6,35 @@
 #include "Jeu.h"
 #include "GestionnaireTexte.h"
 
-constexpr int LONGUEUR_FENETRE{ 1920 };
-constexpr int HAUTEUR_FENETRE{ 1080 };
+constexpr float LONGUEUR_FENETRE{ 1920 };
+constexpr float HAUTEUR_FENETRE{ 1080 };
+
+void redimentionnerView(sf::RenderWindow& window, sf::View& view)
+{
+    double ratioBase = LONGUEUR_FENETRE / HAUTEUR_FENETRE;
+    float windowRatio = float(window.getSize().x) / float(window.getSize().y);
+    float viewRatio = 1280.f / 720.f;
+
+    sf::FloatRect viewport;
+
+    if (windowRatio < viewRatio)
+    {
+        viewport.width = 1.f;
+        viewport.height = windowRatio / viewRatio;
+        viewport.left = 0.f;
+        viewport.top = (1.f - viewport.height) / 2.f;
+    }
+
+    else
+    {
+        viewport.width = viewRatio / windowRatio;
+        viewport.height = 1.f;
+        viewport.left = (1.f - viewport.width) / 2.f;
+        viewport.top = 0.f;
+    }
+
+    view.setViewport(viewport);
+}
 
 int main()
 {
@@ -28,6 +55,8 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::Resized)
+                redimentionnerView(window, view);
         }
         window.setView(view);
         view.setCenter(640.f, 360.f);

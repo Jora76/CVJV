@@ -6,6 +6,7 @@ class Coordonnees
 {
 public:
 	void operator+= (Vecteur const& pos);
+	bool operator != (Coordonnees const& pos);
 	void setX(int ix);
 	void setY(int iy);
 	inline float getX() const { return x; };
