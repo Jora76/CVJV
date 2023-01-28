@@ -8,12 +8,11 @@ Panneau::Panneau(const Coordonnees& position_ptr, Interface& interface_ptr,/* in
 	//tab = tab_ptr;
 }
 
-void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
+void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view)
 {
 	if (!valider)
 	{
-		sf::Vector2f ratio = { window.getSize().x / 1280.f, window.getSize().y / 720.f };
-
+		sf::Vector2f sourisGlobalPos = window.mapPixelToCoords(sf::Mouse::getPosition(window), view);
 		//Drag
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
@@ -28,16 +27,14 @@ void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window)
 
 			if (sf::Event::MouseMoved && type == TypeElement::PANNEAU_DRAG)
 			{
-				position = { static_cast <float>(sf::Mouse::getPosition(window).x / ratio.x),
-							static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
+				position = { sourisGlobalPos.x, sourisGlobalPos.y };
 			}
 
 		}
 
 		//Drop
 
-		Coordonnees posSouris = { static_cast <float>(sf::Mouse::getPosition(window).x / ratio.x),
-								  static_cast <float>(sf::Mouse::getPosition(window).y / ratio.y) };
+		Coordonnees posSouris = { sourisGlobalPos.x, sourisGlobalPos.y };
 
 		if (type == TypeElement::PANNEAU_DRAG && position != posSouris)
 		{
