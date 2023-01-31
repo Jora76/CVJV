@@ -5,15 +5,14 @@ Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_
 }
 
 
-void Jeu::demarrer()
+void Jeu::demarrer() //Doit etre appelée qu'une seule fois. 
 {
-	enCours = true;
     choisirEnigme();
     interface.ajouter(std::make_unique<Fenetre>(cheminFenetre));
     interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
     interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
     enigme.generer(cheminEnigme);
-    instanceActuelle = Instance::ENIGME;
+    instanceActuelle = Instance::MENU;
     initTexte();
 }
 
@@ -29,13 +28,14 @@ void Jeu::choisirEnigme()
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
 
-void Jeu::gererTexte() //gerer tout court, pas juste texte
+void Jeu::actualiserTexte() //gerer tout court, pas juste texte
 {
     switch (instanceActuelle)
     {
     case Instance::ENIGME:
         interface.mettre_A_Jour_Txt_ComptPanneau(texte);
         texte.afficher();
+        break;
     }
 }
 
@@ -53,6 +53,7 @@ void Jeu::actualiser()
     {
         continuer();
     }
+    actualiserTexte();
 }
 
 void Jeu::initTexte()
@@ -63,6 +64,10 @@ void Jeu::initTexte()
         texte.ajouter(texteConsigne, posTxtConsigne, 1);
         texte.ajouter(texteObjectif, posTxtObjectif, 1);
         interface.ajouterCompteurs(texte);
+        break;
+    case Instance::MENU:
+        texte.ajouter(texteMenu, posTxtMenu, 3);
+        break;
     }
 }
 

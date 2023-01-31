@@ -44,9 +44,11 @@ void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, 
 	case TypeTexte::COMPTEUR:
 		textesCompteurs.push_back(texte);
 		break;
-	case TypeTexte::INSTRUCTION :
+	case TypeTexte::INSTRUCTION:
 		textesInstruction.push_back(texte);
 		break;
+	case TypeTexte::AUTRE:
+		textesAutres.push_back(texte);
 	}
 }
 
@@ -57,6 +59,10 @@ void GestionnaireTexte::afficher()
 		window.draw(texte);
 	}
 	for (auto& texte : textesInstruction)
+	{
+		window.draw(texte);
+	}
+	for (auto& texte : textesAutres)
 	{
 		window.draw(texte);
 	}

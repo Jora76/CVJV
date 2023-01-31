@@ -28,11 +28,13 @@ private:
 	//std::vector <sf::Text> textesDialogues;
 	std::vector <sf::Text> textesCompteurs;
 	std::vector <sf::Text> textesInstruction;
+	std::vector <sf::Text> textesAutres;
 
 	enum TypeTexte
 	{
 		COMPTEUR,
 		INSTRUCTION,
-		DIALOGUE
+		DIALOGUE,
+		AUTRE
 	};
 };

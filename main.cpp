@@ -5,6 +5,7 @@
 #include "Enigme.h"
 #include "Jeu.h"
 #include "GestionnaireTexte.h"
+#include "Menu.h"
 
 void redimentionnerView(sf::RenderWindow& window, sf::View& view)
 {
@@ -40,6 +41,7 @@ int main()
     auto interface = Interface{};
     auto enigme = Enigme{interface};
     auto jeu = Jeu{interface, enigme, texte};
+    auto menu = Menu{ event, window, interface, jeu };
     jeu.demarrer();
 
 
@@ -62,7 +64,7 @@ int main()
         window.clear();
         interface.afficher(window);
         jeu.actualiser();
-        jeu.gererTexte();
+        //jeu.gererTexte();
         window.display();
         interface.nettoyer();
     }
