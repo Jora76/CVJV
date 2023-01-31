@@ -42,7 +42,7 @@ int main()
     auto enigme = Enigme{interface};
     auto jeu = Jeu{interface, enigme, texte};
     auto menu = Menu{ event, window, interface, jeu };
-    jeu.demarrer();
+    menu.demarrer();
 
 
     while (window.isOpen())
@@ -64,7 +64,6 @@ int main()
         window.clear();
         interface.afficher(window);
         jeu.actualiser();
-        //jeu.gererTexte();
         window.display();
         interface.nettoyer();
     }

@@ -12,7 +12,7 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
     interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
     interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
     enigme.generer(cheminEnigme);
-    instanceActuelle = Instance::MENU;
+    instanceActuelle = Instance::ENIGME;
     initTexte();
 }
 
@@ -34,9 +34,9 @@ void Jeu::actualiserTexte() //gerer tout court, pas juste texte
     {
     case Instance::ENIGME:
         interface.mettre_A_Jour_Txt_ComptPanneau(texte);
-        texte.afficher();
         break;
     }
+    texte.afficher();
 }
 
 

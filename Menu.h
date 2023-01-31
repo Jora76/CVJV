@@ -18,7 +18,7 @@ public:
 private:
 	Jeu& jeu;
 	Interface& interface;
-	Coordonnees position{ 640.f, 300 };
+	Coordonnees position{ 750, 200 };
 	sf::Event& event;
 	sf::RenderWindow& window;
 };

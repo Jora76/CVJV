@@ -3,5 +3,7 @@
 class Titre :
     public ElementInterface
 {
+public:
+    Titre(Coordonnees& position_ptr);
 };
 

@@ -27,6 +27,7 @@ public :
 	void actualiser();
 	void terminer();
 	void initTexte();
+	void continuer();
 
 private:
 	Interface& interface;
@@ -37,16 +38,15 @@ private:
 	std::string cheminEnigme;
 
 	void choisirEnigme();
-	void continuer();
 	void actualiserTexte();
 
-	Instance instanceActuelle;
+	Instance instanceActuelle = Instance::MENU;
 	std::string texteConsigne{ "Objectif : Ramassez tous les checkpoints !" };
 	std::string texteObjectif{ "Placez les panneaux de manière à emmener le curseur vers l'arrivée." };
 	std::string texteMenu{ "Proposé par Joris BORGES." };
 
 	Coordonnees posTxtConsigne{ 172, 85 };
 	Coordonnees posTxtObjectif{ 172, 140 };
-	Coordonnees posTxtMenu{ 1260, 700 };
+	Coordonnees posTxtMenu{ 1000, 600 };
 };
 

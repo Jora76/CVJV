@@ -72,5 +72,6 @@ void GestionnaireTexte::vider()
 {
 	textesCompteurs.clear();
 	textesInstruction.clear();
+	textesAutres.clear();
 }
 
