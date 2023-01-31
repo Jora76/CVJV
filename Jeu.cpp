@@ -67,6 +67,7 @@ void Jeu::initTexte()
         break;
     case Instance::MENU:
         texte.ajouter(texteMenu, posTxtMenu, 3);
+        texte.ajouter(texteEchap, posTxtEchap, 3, 15);
         break;
     }
 }

@@ -20,13 +20,13 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::Vie
 
 	if ((sourisGlobalPos.x < btnxPosWidht && sourisGlobalPos.x > btnxPosReelle && sourisGlobalPos.y < btnyPosHeight && sourisGlobalPos.y > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
 	{
-		setCouleur(true);
+		reagirSouris(true);
 		testerClic(event, window, view);
 		return true;
 	}
 	else
 	{
-		setCouleur(false);
+		reagirSouris(false);
 		return false;
 	}
 }
@@ -44,6 +44,10 @@ void Bouton::supprimerPanneau()
 	supprimer = true;
 }
 
+void Bouton::reagirSouris(bool sourisDessus)
+{
+
+}
 
 /*----------------------------------------------------------------------------------------
 

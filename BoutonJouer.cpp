@@ -12,6 +12,6 @@ void BoutonJouer::reagirClic(sf::Event& event)
 	jeu.continuer();
 }
 
-void BoutonJouer::setCouleur(bool sourisDessus)
+void BoutonJouer::reagirSouris(bool sourisDessus)
 {
 }

@@ -13,7 +13,7 @@ void BoutonGrille::reagirClic(sf::Event& event)
 {
 }
 
-void BoutonGrille::setCouleur(bool sourisDessus)
+void BoutonGrille::reagirSouris(bool sourisDessus)
 {
 	if(sourisDessus)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));

@@ -5,10 +5,10 @@ GestionnaireTexte::GestionnaireTexte(sf::RenderWindow& window_ptr) : window{wind
 	police.loadFromMemory(data, data_length);
 }
 
-void GestionnaireTexte::setStyle(sf::Text& texte)
+void GestionnaireTexte::setStyle(sf::Text& texte, int taille)
 {
 	texte.setFillColor(sf::Color::Green);
-	texte.setCharacterSize(20);
+	texte.setCharacterSize(taille);
 	texte.setFont(police);
 	//defiler(texte);
 }
@@ -32,11 +32,11 @@ void GestionnaireTexte::actualiserCompteurs(size_t i, std::string& contenu)
 	textesCompteurs[i].setString(contenu);
 }
 
-void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte)
+void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte, int taille)
 {
 	sf::Text texte;
 	texte.setString(contenuTxt);
-	setStyle(texte);
+	setStyle(texte, taille);
 	texte.setPosition(position.getX(), position.getY());
 
 	switch (typeTexte)

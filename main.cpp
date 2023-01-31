@@ -36,7 +36,7 @@ int main()
 {
     sf::Event event;
     sf::View view (sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280, 720));
-    sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), "CV Jeu-vidéo");
+    sf::RenderWindow window(sf::VideoMode::getFullscreenModes()[0], "CV Jeu-vidéo", sf::Style::Fullscreen);
     auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
     auto enigme = Enigme{interface};
@@ -54,6 +54,12 @@ int main()
                 window.close();
             if (event.type == sf::Event::Resized)
                 redimentionnerView(window, view);
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            {
+                sf::VideoMode bureau = sf::VideoMode::getDesktopMode();
+                window.create(sf::VideoMode(bureau.width, bureau.height), "CV Jeu-vidéo", sf::Style::Default);
+            }
+                
         }
         window.setView(view);
         view.setCenter(640.f, 360.f);

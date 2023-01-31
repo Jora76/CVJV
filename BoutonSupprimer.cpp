@@ -14,7 +14,7 @@ void BoutonSupprimer::reagirClic(sf::Event& event)
 		interface.viderGrille();
 }
 
-void BoutonSupprimer::setCouleur(bool sourisDessus)
+void BoutonSupprimer::reagirSouris(bool sourisDessus)
 {
 	if (sourisDessus)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));

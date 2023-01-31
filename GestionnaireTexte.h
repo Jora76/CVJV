@@ -14,9 +14,9 @@ class GestionnaireTexte
 public:
 	GestionnaireTexte(sf::RenderWindow& window_ptr);
 	GestionnaireTexte(std::string& contenu, Coordonnees& position);
-	void setStyle(sf::Text& texte);
+	void setStyle(sf::Text& texte, int taille);
 	void defiler(sf::Text& texte);
-	void ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte);
+	void ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte, int taille = 20);
 	void actualiserCompteurs(size_t i, std::string& contenu);
 	void afficher();
 	void vider();

@@ -12,6 +12,6 @@ public:
     Interface& interface;
     virtual void reagirClic(sf::Event& event) override;
 private:
-    virtual void setCouleur(bool sourisDessus) override;
+    virtual void reagirSouris(bool sourisDessus) override;
 };
 

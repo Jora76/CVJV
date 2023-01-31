@@ -127,7 +127,7 @@ void Curseur::reagirClic(sf::Event& event)
 	}
 }
 
-void Curseur::setCouleur(bool sourisDessus)
+void Curseur::reagirSouris(bool sourisDessus)
 {
 	if (sourisDessus)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));

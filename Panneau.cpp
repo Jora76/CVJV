@@ -78,7 +78,7 @@ void Panneau::reagirCollision(TypeElement typeAutre, float angle)
 	if(typeAutre == TypeElement::CURSEUR)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 0));
 }
-void Panneau::setCouleur(bool sourisDessus)
+void Panneau::reagirSouris(bool sourisDessus)
 {
 	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
