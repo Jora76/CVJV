@@ -11,7 +11,3 @@ void BoutonJouer::reagirClic(sf::Event& event)
 	interface.vider();
 	jeu.continuer();
 }
-
-void BoutonJouer::reagirSouris(bool sourisDessus)
-{
-}

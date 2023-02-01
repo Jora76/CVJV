@@ -3,7 +3,7 @@
 Panneau::Panneau(const Coordonnees& position_ptr, Interface& interface_ptr, std::string_view chemin) : Bouton{position, chemin }, interface{interface_ptr}
 {
 	type = TypeElement::AUTRE;
-	sprite.setScale(sprite.getScale().x, sprite.getScale().x);
+	sprite.setScale(sprite.getScale().x * 0.9f, sprite.getScale().x * 0.9f);
 }
 
 void Panneau::testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view)
@@ -77,9 +77,9 @@ void Panneau::reagirCollision(TypeElement typeAutre, float angle)
 {
 	if(typeAutre == TypeElement::CURSEUR)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 0));
-}
+}/*
 void Panneau::reagirSouris(bool sourisDessus)
 {
 	if (type == TypeElement::PANNEAU || type == TypeElement::TP)
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
-}
+}*/

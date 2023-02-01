@@ -18,6 +18,7 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::Vie
 	float btnxPosReelle = sprite.getPosition().x - sprite.getGlobalBounds().width / 2;
 	float btnyPosReelle = sprite.getPosition().y - sprite.getGlobalBounds().height / 2;
 
+
 	if ((sourisGlobalPos.x < btnxPosWidht && sourisGlobalPos.x > btnxPosReelle && sourisGlobalPos.y < btnyPosHeight && sourisGlobalPos.y > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
 	{
 		reagirSouris(true);
@@ -46,7 +47,23 @@ void Bouton::supprimerPanneau()
 
 void Bouton::reagirSouris(bool sourisDessus)
 {
-
+	sf::Vector2f tailleBtn = sprite.getScale();
+	if (sourisDessus == true)
+	{
+		if (!tailleMax)
+		{
+			tailleMax = true;
+			sprite.setScale(tailleBtn.x / COEF_TAILLE, tailleBtn.y / COEF_TAILLE);
+		}
+	}
+	else
+	{
+		if (tailleMax)
+		{
+			tailleMax = false;
+			sprite.setScale(tailleBtn.x * COEF_TAILLE, tailleBtn.y * COEF_TAILLE);
+		}
+	}
 }
 
 /*----------------------------------------------------------------------------------------

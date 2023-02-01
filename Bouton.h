@@ -14,10 +14,11 @@ public:
     void supprimerPanneau();
 protected:
     virtual void reagirClic(sf::Event& event) = 0;
-    bool selection{ false };
+    bool tailleMax{ false };
     bool supprimer{ false };
     virtual void reagirSouris(bool sourisDessus);
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view);
+    static constexpr float COEF_TAILLE = 0.8f;
 private:
 };
 
