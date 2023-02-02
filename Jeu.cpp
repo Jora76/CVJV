@@ -17,6 +17,7 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
         enigme.generer(cheminEnigme);
         break;
     case Instance::DIALOGUE:
+        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Fenetre_gauche.png"));
         initDialogues();
         break;
     }

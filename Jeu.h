@@ -55,7 +55,7 @@ private:
 	Coordonnees posTxtObjectif{ 172, 140 };
 	Coordonnees posTxtMenu{ 1000, 650 };
 	Coordonnees posTxtEchap{ 10, 20 };
-	Coordonnees posTxtDialogues{ 300, 500 };
+	Coordonnees posTxtDialogues{ 100, 550 };
 
 	size_t i = 0;
 };

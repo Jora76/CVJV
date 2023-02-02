@@ -1,6 +1,6 @@
 #include "GestionnaireTexte.h"
 
-GestionnaireTexte::GestionnaireTexte(sf::RenderWindow& window_ptr) : window{window_ptr}
+GestionnaireTexte::GestionnaireTexte(sf::RenderWindow& window_ptr) : window { window_ptr }
 {
 	police.loadFromMemory(data, data_length);
 }
@@ -16,14 +16,20 @@ void GestionnaireTexte::defiler(sf::Text& texte)
 {
 	std::string string = texte.getString();
 	std::string str;
-	for (char c : string)
-	{
-		str += c;
-		texte.setString(str);
-		window.clear();
-		window.draw(texte);
-		window.display();
-		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+	chrono.restart().asMilliseconds();
+	for (auto i = 0; i < string.size(); i)
+	{ 
+		sf::Time temps = sf::milliseconds(chrono.getElapsedTime().asMilliseconds());
+		if (temps >= test)
+		{
+			str += string[i];
+			texte.setString(str);
+			window.clear();
+			window.draw(texte);
+			window.display();
+			++i;
+			chrono.restart().asMilliseconds();
+		}
 	}
 }
 

@@ -10,7 +10,6 @@
 #include "Coordonnees.h"
 #include "VarelaRound-Regular.h" //police
 
-
 class GestionnaireTexte
 {
 public:
@@ -25,6 +24,8 @@ public:
 private:
 	sf::Font police;
 	sf::RenderWindow& window;
+	sf::Clock chrono;
+	sf::Time test = sf::milliseconds(20.f);
 	unsigned short int caractere = 0;
 	//std::vector <sf::Text> textesDialogues;
 	std::vector <sf::Text> textesCompteurs;
