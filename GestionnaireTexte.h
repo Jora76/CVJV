@@ -5,6 +5,8 @@
 #include <memory>
 #include <array>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "Coordonnees.h"
 #include "VarelaRound-Regular.h" //police
 
@@ -22,14 +24,13 @@ public:
 	void vider();
 private:
 	sf::Font police;
-	sf::Clock chrono;
 	sf::RenderWindow& window;
 	unsigned short int caractere = 0;
 	//std::vector <sf::Text> textesDialogues;
 	std::vector <sf::Text> textesCompteurs;
 	std::vector <sf::Text> textesInstruction;
 	std::vector <sf::Text> textesAutres;
-
+	sf::Text dialogueActuel;
 	enum TypeTexte
 	{
 		COMPTEUR,

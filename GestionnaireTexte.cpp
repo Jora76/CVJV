@@ -10,20 +10,20 @@ void GestionnaireTexte::setStyle(sf::Text& texte, int taille)
 	texte.setFillColor(sf::Color::Green);
 	texte.setCharacterSize(taille);
 	texte.setFont(police);
-	//defiler(texte);
 }
 
 void GestionnaireTexte::defiler(sf::Text& texte)
 {
-	sf::String string = texte.getString();
-	while (caractere < string.getSize())
+	std::string string = texte.getString();
+	std::string str;
+	for (char c : string)
 	{
-		if (chrono.getElapsedTime().asMilliseconds() > 50)
-		{
-			chrono.restart();
-			++caractere;
-			texte.setString(string.substring(0, caractere));
-		}
+		str += c;
+		texte.setString(str);
+		window.clear();
+		window.draw(texte);
+		window.display();
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 	}
 }
 
@@ -49,11 +49,18 @@ void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, 
 		break;
 	case TypeTexte::AUTRE:
 		textesAutres.push_back(texte);
+		break;
+	case TypeTexte::DIALOGUE:
+		defiler(texte);
+		dialogueActuel = texte;
+		break;
 	}
 }
 
 void GestionnaireTexte::afficher()
 {
+	window.draw(dialogueActuel);
+
 	for (auto& texte : textesCompteurs)
 	{
 		window.draw(texte);
@@ -73,5 +80,6 @@ void GestionnaireTexte::vider()
 	textesCompteurs.clear();
 	textesInstruction.clear();
 	textesAutres.clear();
+	dialogueActuel.setString(" ");
 }
 

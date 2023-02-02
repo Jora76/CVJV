@@ -26,7 +26,7 @@ public:
 	inline Coordonnees getPosBtn() { return positionBouton; };
 	bool dragAutre();
 	inline bool getContinuer() { return continuer; };
-	inline void setContinuer() { continuer = false; };
+	inline void setContinuer(bool booleen) { continuer = booleen; };
 
 	void setComptPanneaux(size_t i, unsigned short int compt);
 	void actualiserComptPanneau(unsigned short int terme, int typePanneau);

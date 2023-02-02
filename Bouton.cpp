@@ -63,6 +63,8 @@ void Bouton::reagirSouris(bool sourisDessus)
 			tailleMax = false;
 			sprite.setScale(tailleBtn.x * COEF_TAILLE, tailleBtn.y * COEF_TAILLE);
 		}
+		if(type == TypeElement::PANNEAU || type == TypeElement::TP)
+			sprite.setColor(sf::Color::Color(0, 255, 0, 255));
 	}
 }
 

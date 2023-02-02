@@ -40,7 +40,7 @@ int main()
     auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
     auto enigme = Enigme{interface};
-    auto jeu = Jeu{interface, enigme, texte};
+    auto jeu = Jeu{interface, enigme, texte, event};
     auto menu = Menu{ event, window, interface, jeu };
     menu.demarrer();
 

@@ -18,7 +18,6 @@ protected:
 private:
     virtual void reagirClic(sf::Event& event) override;
     virtual void reagirCollision(TypeElement typeAutre, float angle = 0) override;
-    //virtual void reagirSouris(bool sourisDessus, float temps = 0.1f) override;
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view) override;
     void drop();
    

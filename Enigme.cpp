@@ -14,10 +14,10 @@ void Enigme::lireFichier(std::string_view const& chemin)
 	}
 	else
 	{
-		int test;
-		while (enigme >> test)
+		int donnee;
+		while (enigme >> donnee)
 		{
-			grille.push_back(test);
+			grille.push_back(donnee);
 		}
 	}
 }

@@ -1,19 +1,25 @@
 #include "Jeu.h"
 
-Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_ptr) : interface{ interface_ptr }, enigme{enigme_ptr}, texte{texte_ptr}
+Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_ptr, sf::Event& event_ptr) : interface{ interface_ptr }, enigme{enigme_ptr}, texte{texte_ptr}, event{event_ptr}
 {
 }
 
 
 void Jeu::demarrer() //Doit etre appelée qu'une seule fois. 
 {
-    choisirEnigme();
-    interface.ajouter(std::make_unique<Fenetre>(cheminFenetre));
-    interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
-    interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
-    enigme.generer(cheminEnigme);
-    instanceActuelle = Instance::ENIGME;
-    initTexte();
+    switch (instanceActuelle)
+    {
+    case Instance::ENIGME:
+        choisirEnigme();
+        interface.ajouter(std::make_unique<Fenetre>(cheminFenetre));
+        interface.ajouterBouton(std::make_unique<BoutonValider>(interface));
+        interface.ajouterBouton(std::make_unique<BoutonSupprimer>(interface));
+        enigme.generer(cheminEnigme);
+        break;
+    case Instance::DIALOGUE:
+        initDialogues();
+        break;
+    }
 }
 
 void Jeu::choisirEnigme()
@@ -35,16 +41,68 @@ void Jeu::actualiserTexte() //gerer tout court, pas juste texte
     case Instance::ENIGME:
         interface.mettre_A_Jour_Txt_ComptPanneau(texte);
         break;
+    case Instance::DIALOGUE:
+        bool clic = false;
+        if (event.type == sf::Event::MouseButtonPressed && !clic)
+        {
+            clic = true;
+            if (i < dialogues.size())
+            {
+                texte.ajouter(dialogues[i], posTxtDialogues, 2);
+                ++i;
+                //texte.afficher();
+            }
+            else
+            {
+                interface.setContinuer(true);
+            }
+        }
+        break;
     }
     texte.afficher();
+}
+
+void Jeu::setInstance()
+{
+    switch (instanceActuelle)
+    {
+    case Instance::DIALOGUE:
+        instanceActuelle = Instance::ENIGME;
+        break;
+    default:
+        instanceActuelle = Instance::DIALOGUE;
+        break;
+    }
+}
+
+void Jeu::initDialogues()
+{
+    std::string chemin = "ressources/dialogues/dialogues" + std::to_string(compteur) + ".txt";
+    std::ifstream dialogue(chemin.data());
+
+    if (!dialogue)
+    {
+        std::cout << "Le fichier n'a pas pu etre charge." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        std::string ligne;
+        while (getline(dialogue, ligne))
+        {
+            dialogues.push_back(ligne);
+        }
+    }
 }
 
 
 void Jeu::continuer()
 {
     texte.vider();
+    setInstance();
     demarrer();
-    interface.setContinuer();
+    initTexte();
+    interface.setContinuer(false);
 }
 
 void Jeu::actualiser()
