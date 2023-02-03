@@ -4,6 +4,7 @@ Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_
 {
 }
 
+//ouaiche le sang bien ou quoi ?
 
 void Jeu::demarrer() //Doit etre appelée qu'une seule fois. 
 {
