@@ -257,6 +257,30 @@ void Interface::ajouterCompteurs(GestionnaireTexte& compteur)
 		posCompt.setY(posCompt.getY() + 77.f);
 	}
 }
+
+void Interface::defilerTxt(GestionnaireTexte& txt, sf::Text& texte, const Coordonnees& position, sf::RenderWindow& window)
+{
+	std::string string = texte.getString();
+	std::string str;
+	chrono.restart().asMilliseconds();
+	for (auto i = 0; i < string.size(); i)
+	{
+		sf::Time temps = sf::milliseconds(chrono.getElapsedTime().asMilliseconds());
+		if (temps >= tempsMax)
+		{
+			str += string[i];
+			texte.setString(str);
+			txt.setStyle(texte, 20);
+			texte.setPosition(position.getX(), position.getY());
+			window.clear();
+			afficher(window);
+			window.draw(texte);
+			window.display();
+			++i;
+			chrono.restart().asMilliseconds();
+		}
+	}
+}
 /*
 	Regler répétition de code dans cette classe, c'est vraiment le bordel là.
 */

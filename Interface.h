@@ -33,6 +33,7 @@ public:
 	bool panneauDispo(float typePanneau);
 	void ajouterCompteurs(GestionnaireTexte& compteur);
 	void mettre_A_Jour_Txt_ComptPanneau(GestionnaireTexte& texte);
+	void defilerTxt(GestionnaireTexte& txt, sf::Text& texte, const Coordonnees& position, sf::RenderWindow& window);
 
 private:
 	std::vector<std::unique_ptr<ElementInterface>> elements{};
@@ -48,4 +49,7 @@ private:
 	size_t emplacementTypePanneau(int typePanneau);
 
 	void reinitialiserCompteurs();
+
+	sf::Clock chrono; 
+	sf::Time tempsMax;
 };

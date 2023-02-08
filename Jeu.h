@@ -24,7 +24,7 @@ class Jeu
 public :
 	Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_ptr, sf::Event& event_ptr);
 	void demarrer();
-	void actualiser();
+	void actualiser(sf::RenderWindow& window);
 	void terminer();
 	void initTexte();
 	void continuer();
@@ -40,7 +40,7 @@ private:
 	std::string cheminEnigme;
 
 	void choisirEnigme();
-	void actualiserTexte();
+	void actualiserTexte(sf::RenderWindow& window);
 	void setInstance();
 	void initDialogues();
 
@@ -51,11 +51,12 @@ private:
 	std::string texteEchap{ "Appuyez sur <Echap> à tout moment pour quitter le mode plein écran." };
 	std::vector<std::string> dialogues;
 
-	Coordonnees posTxtConsigne{ 172, 85 };
-	Coordonnees posTxtObjectif{ 172, 140 };
-	Coordonnees posTxtMenu{ 1000, 650 };
-	Coordonnees posTxtEchap{ 10, 20 };
-	Coordonnees posTxtDialogues{ 100, 550 };
+	const Coordonnees posTxtConsigne{ 172, 85 };
+	const Coordonnees posTxtObjectif{ 172, 140 };
+	const Coordonnees posTxtMenu{ 1000, 650 };
+	const Coordonnees posTxtEchap{ 10, 20 };
+	const Coordonnees posTxtDialogues{ 100, 550 };
+	const Coordonnees posFenDialogues{ 550, 575 };
 
 	size_t i = 0;
 };

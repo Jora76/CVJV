@@ -12,33 +12,44 @@ void GestionnaireTexte::setStyle(sf::Text& texte, int taille)
 	texte.setFont(police);
 }
 
-void GestionnaireTexte::defiler(sf::Text& texte)
-{
-	std::string string = texte.getString();
-	std::string str;
-	chrono.restart().asMilliseconds();
-	for (auto i = 0; i < string.size(); i)
-	{ 
-		sf::Time temps = sf::milliseconds(chrono.getElapsedTime().asMilliseconds());
-		if (temps >= test)
-		{
-			str += string[i];
-			texte.setString(str);
-			window.clear();
-			window.draw(texte);
-			window.display();
-			++i;
-			chrono.restart().asMilliseconds();
-		}
-	}
-}
+//void GestionnaireTexte::defiler(sf::Text& texte)
+//{
+//	std::string string = texte.getString();
+//	std::string str;
+//	chrono.restart().asMilliseconds();
+//	for (auto i = 0; i < string.size(); i)
+//	{ 
+//		sf::Time temps = sf::milliseconds(chrono.getElapsedTime().asMilliseconds());
+//		if (temps >= test)
+//		{
+//			str += string[i];
+//			texte.setString(str);
+//			window.clear();
+//			window.draw(texte);
+//			window.display();
+//			++i;
+//			chrono.restart().asMilliseconds();
+//		}
+//	}
+//
+//	/*for (auto i = 0; i < string.size(); i)
+//	{
+//		str += string[i];
+//		texte.setString(str);
+//		window.clear();
+//		window.draw(texte);
+//		window.display();
+//		++i;
+//		std::this_thread::sleep_for(std::chrono::milliseconds(20));
+//	}*/
+//}
 
 void GestionnaireTexte::actualiserCompteurs(size_t i, std::string& contenu)
 {
 	textesCompteurs[i].setString(contenu);
 }
 
-void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte, int taille)
+void GestionnaireTexte::ajouter(std::string& contenuTxt, const Coordonnees& position, int typeTexte, int taille)
 {
 	sf::Text texte;
 	texte.setString(contenuTxt);
@@ -57,10 +68,14 @@ void GestionnaireTexte::ajouter(std::string& contenuTxt, Coordonnees& position, 
 		textesAutres.push_back(texte);
 		break;
 	case TypeTexte::DIALOGUE:
-		defiler(texte);
 		dialogueActuel = texte;
 		break;
 	}
+}
+
+void GestionnaireTexte::afficher(sf::Text& texte)
+{
+	window.draw(texte);
 }
 
 void GestionnaireTexte::afficher()

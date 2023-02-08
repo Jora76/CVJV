@@ -7,6 +7,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <functional>
 #include "Coordonnees.h"
 #include "VarelaRound-Regular.h" //police
 
@@ -16,10 +17,11 @@ public:
 	GestionnaireTexte(sf::RenderWindow& window_ptr);
 	GestionnaireTexte(std::string& contenu, Coordonnees& position);
 	void setStyle(sf::Text& texte, int taille);
-	void defiler(sf::Text& texte);
-	void ajouter(std::string& contenuTxt, Coordonnees& position, int typeTexte, int taille = 20);
+	//void defiler(sf::Text& texte);
+	void ajouter(std::string& contenuTxt, const Coordonnees& position, int typeTexte, int taille = 20);
 	void actualiserCompteurs(size_t i, std::string& contenu);
 	void afficher();
+	void afficher(sf::Text& texte);
 	void vider();
 private:
 	sf::Font police;

@@ -19,6 +19,7 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
         break;
     case Instance::DIALOGUE:
         interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Fenetre_gauche.png"));
+        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_haut.png", posFenDialogues));
         initDialogues();
         break;
     }
@@ -36,7 +37,7 @@ void Jeu::choisirEnigme()
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
 
-void Jeu::actualiserTexte() //gerer tout court, pas juste texte
+void Jeu::actualiserTexte(sf::RenderWindow& window) //gerer tout court, pas juste texte
 {
     switch (instanceActuelle)
     {
@@ -50,9 +51,11 @@ void Jeu::actualiserTexte() //gerer tout court, pas juste texte
             clic = true;
             if (i < dialogues.size())
             {
+                sf::Text dial;
+                dial.setString(dialogues[i]);
                 texte.ajouter(dialogues[i], posTxtDialogues, 2);
+                interface.defilerTxt(texte, dial, posTxtDialogues, window);
                 ++i;
-                //texte.afficher();
             }
             else
             {
@@ -101,19 +104,20 @@ void Jeu::initDialogues()
 void Jeu::continuer()
 {
     texte.vider();
+    interface.vider();
     setInstance();
     demarrer();
     initTexte();
     interface.setContinuer(false);
 }
 
-void Jeu::actualiser()
+void Jeu::actualiser(sf::RenderWindow& window)
 {
     if (interface.getContinuer() == true)
     {
         continuer();
     }
-    actualiserTexte();
+    actualiserTexte(window);
 }
 
 void Jeu::initTexte()

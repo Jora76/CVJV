@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <thread>
+#include <functional>
 
 #include "Interface.h"
 #include "Enigme.h"
@@ -69,7 +71,9 @@ int main()
         interface.actualiser();
         window.clear();
         interface.afficher(window);
-        jeu.actualiser();
+        //std::thread afficher(&Interface::afficher, &interface, std::ref(window));
+        //afficher.detach();
+        jeu.actualiser(window);
         window.display();
         interface.nettoyer();
     }
