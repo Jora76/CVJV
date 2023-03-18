@@ -4,8 +4,6 @@ Jeu::Jeu(Interface& interface_ptr, Enigme& enigme_ptr, GestionnaireTexte& texte_
 {
 }
 
-//ouaiche le sang bien ou quoi ?
-
 void Jeu::demarrer() //Doit etre appelée qu'une seule fois. 
 {
     switch (instanceActuelle)
@@ -18,8 +16,7 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
         enigme.generer(cheminEnigme);
         break;
     case Instance::DIALOGUE:
-        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Fenetre_gauche.png"));
-        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_haut.png", posFenDialogues));
+        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_dialogues.png"));
         initDialogues();
         break;
     }
