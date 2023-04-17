@@ -55,7 +55,7 @@ private:
 	const Coordonnees posTxtObjectif{ 172, 140 };
 	const Coordonnees posTxtMenu{ 1000, 650 };
 	const Coordonnees posTxtEchap{ 10, 20 };
-	const Coordonnees posTxtDialogues{ 100, 575 };
+	const Coordonnees posTxtDialogues{ 100, 600 };
 	//Coordonnees posTxtFen {}
 
 	size_t i = 0;
