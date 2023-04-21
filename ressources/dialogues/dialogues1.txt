@@ -1,5 +1,6 @@
 Grace a vous une partie des donnees ont ete decryptees.
 Voici ce que nous avons recupere grace a votre travail :
+#
 Tout d'abord, il a obtenu les baccalaureats ES et S.
 Il a passe le bac S pour obtenir des bases solides necessaires a l'informatique.
 Ensuite il a fait 2 annees de licence mathematiques/informatique.

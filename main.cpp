@@ -46,7 +46,6 @@ int main()
     auto menu = Menu{ event, window, interface, jeu };
     menu.demarrer();
 
-
     while (window.isOpen())
     {
         window.setFramerateLimit(60);
@@ -74,6 +73,11 @@ int main()
         //std::thread afficher(&Interface::afficher, &interface, std::ref(window));
         //afficher.detach();
         jeu.actualiser(window);
+        if (jeu.terminerJeu) 
+        {
+            menu.demarrer();
+            jeu.terminerJeu = false;
+        }
         window.display();
         interface.nettoyer();
     }

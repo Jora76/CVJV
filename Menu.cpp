@@ -14,4 +14,6 @@ void Menu::demarrer()
 	position.setY(550);
 	interface.ajouterBouton(std::make_unique<BoutonQuitter>(window, position));
 	jeu.initTexte();
+	position.setX(780);
+	position.setY(200);
 }

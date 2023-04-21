@@ -29,6 +29,8 @@ public :
 	void initTexte();
 	void continuer();
 
+	bool terminerJeu = false;
+
 private:
 	Interface& interface;
 	Enigme &enigme;
@@ -43,12 +45,14 @@ private:
 	void actualiserTexte(sf::RenderWindow& window);
 	void setInstance();
 	void initDialogues();
+	void initFenDial();
 
 	Instance instanceActuelle = Instance::MENU;
 	std::string texteConsigne{ "Objectif : Ramassez tous les checkpoints !" };
 	std::string texteObjectif{ "Placez les panneaux de manière à emmener le curseur vers l'arrivée." };
 	std::string texteMenu{ "Proposé par Joris BORGES." };
 	std::string texteEchap{ "Appuyez sur <Echap> à tout moment pour quitter le mode plein écran." };
+	std::string texteFin{ "Merci à Yanis pour le sound design." };
 	std::vector<std::string> dialogues;
 
 	const Coordonnees posTxtConsigne{ 172, 85 };
@@ -56,8 +60,12 @@ private:
 	const Coordonnees posTxtMenu{ 1000, 650 };
 	const Coordonnees posTxtEchap{ 10, 20 };
 	const Coordonnees posTxtDialogues{ 100, 600 };
-	//Coordonnees posTxtFen {}
-
+	const Coordonnees posTxtFin{ 640, 360 };
+	std::array<int, 8> tabPosFen {0, 0, 1000, 0, 0, 250, 650, 0};
+	const Coordonnees posFenDial{ 30, 530 };
+	Coordonnees posFen;
+	bool estInit = false;
 	size_t i = 0;
+	size_t posFenIt = 0;
 };
 

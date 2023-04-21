@@ -16,8 +16,12 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
         enigme.generer(cheminEnigme);
         break;
     case Instance::DIALOGUE:
-        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_dialogues2.png" /*+ std::to_string(compteur) + ".png")*/));
+        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Fenetre_dialogues.png", posFenDial));
         initDialogues();
+        break;
+    case Instance::MENU:
+        terminerJeu = true;
+        compteur = 0;
         break;
     }
 }
@@ -25,11 +29,11 @@ void Jeu::demarrer() //Doit etre appelée qu'une seule fois.
 void Jeu::choisirEnigme()
 {
     if (compteur < 3) {
-       // compteur = 2;
         ++compteur;
     }
     else
         terminer();
+    //++compteur;
     cheminEnigme = "ressources/niveaux/enigme" + std::to_string(compteur) + ".txt";
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
@@ -42,20 +46,37 @@ void Jeu::actualiserTexte(sf::RenderWindow& window) //gerer tout court, pas just
         interface.mettre_A_Jour_Txt_ComptPanneau(texte);
         break;
     case Instance::DIALOGUE:
+        if (compteur > 0 && !estInit)
+        {
+            initFenDial();
+            estInit = true;
+        }
         bool clic = false;
         if (event.type == sf::Event::MouseButtonPressed && !clic)
         {
             clic = true;
             if (i < dialogues.size())
             {
-                sf::Text dial;
-                dial.setString(dialogues[i]);
-                texte.ajouter(dialogues[i], posTxtDialogues, 2);
-                interface.defilerTxt(texte, dial, posTxtDialogues, window);
-                ++i;
+                if (dialogues[i].size() == 1)
+                {
+                    posFen.setX(tabPosFen[posFenIt]);
+                    posFen.setY(tabPosFen[posFenIt + 1]);
+                    interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_dialogues" + std::to_string(compteur) + ".png", posFen));
+                    ++i;
+                }
+                else
+                {
+                    sf::Text dial;
+                    dial.setString(dialogues[i]);
+                    texte.ajouter(dialogues[i], posTxtDialogues, 2);
+                    interface.defilerTxt(texte, dial, posTxtDialogues, window);
+                    ++i;
+                }
             }
             else
             {
+                estInit = false;
+                posFenIt = 0;
                 interface.setContinuer(true);
             }
         }
@@ -64,12 +85,31 @@ void Jeu::actualiserTexte(sf::RenderWindow& window) //gerer tout court, pas just
     texte.afficher();
 }
 
+void Jeu::initFenDial()
+{
+    for (int j = 0; j < compteur; j++)
+    {
+        posFen.setX(tabPosFen[posFenIt]);
+        posFen.setY(tabPosFen[posFenIt + 1]);
+        interface.ajouter(std::make_unique<Fenetre>("ressources/sprites/Interface_dialogues" + std::to_string(j) + ".png", posFen));
+        posFenIt += 2;
+    }
+}
+
 void Jeu::setInstance()
 {
     switch (instanceActuelle)
     {
     case Instance::DIALOGUE:
-        instanceActuelle = Instance::ENIGME;
+        if (compteur < 3)
+        {
+            instanceActuelle = Instance::ENIGME;
+        }
+        else
+        {
+            instanceActuelle = Instance::MENU;
+            terminer();
+        }
         break;
     default:
         instanceActuelle = Instance::DIALOGUE;
@@ -114,6 +154,10 @@ void Jeu::actualiser(sf::RenderWindow& window)
     {
         continuer();
     }
+    /*else
+    {
+        terminer();
+    }*/
     actualiserTexte(window);
 }
 
@@ -135,5 +179,11 @@ void Jeu::initTexte()
 
 void Jeu::terminer()
 {
+    texte.vider();
     interface.vider();
+    terminerJeu = true;
+   /* sf::Text dial;
+    dial.setString(texteFin);
+    texte.ajouter(texteFin, posTxtFin, 2);
+    interface.defilerTxt(texte, dial, posTxtDialogues, window);*/
 }

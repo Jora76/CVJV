@@ -1,6 +1,8 @@
 Bonjour agent X.
 Nous sommes a la recherche d'un homme du nom de Joris BORGES.
 D'apres le peu d'informations que nous avons sur lui, il ferait partie des meilleurs.
+Voici les donnees que nous avons sur notre homme :
+#
 Il serait a la recherche d'un contrat en alternance en tant que developpeur informatique.
 Le probleme c'est que ses donnees sont cryptees, et tous nos agents sur place n'ont rien pu faire.
 Votre mission, si vous l'acceptez, sera de decrypter ces donnees.
