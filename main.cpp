@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <memory>
 #include <thread>
 #include <functional>
@@ -39,6 +40,10 @@ int main()
     sf::Event event;
     sf::View view (sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1280, 720));
     sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height), "CV Jeu-vidéo", sf::Style::Fullscreen);
+    sf::Music musique;
+    musique.openFromFile("ressources/sons/etrange_soiree.wav");
+    musique.play();
+    musique.setLoop(true);
     auto texte = GestionnaireTexte{window};
     auto interface = Interface{};
     auto enigme = Enigme{interface};
@@ -70,8 +75,6 @@ int main()
         interface.actualiser();
         window.clear();
         interface.afficher(window);
-        //std::thread afficher(&Interface::afficher, &interface, std::ref(window));
-        //afficher.detach();
         jeu.actualiser(window);
         if (jeu.terminerJeu) 
         {
@@ -87,13 +90,10 @@ int main()
 
 /*Reste à faire :
 
-- mini histoire avec lignes de dialogue (en cours)
-- création classe jeu qui va gerer le déroulement de la partie (en cours)
-- coder les textes (en cours)
-- coder les boutons (en cours)
 - gestion des erreurs et exceptions
 - sound design
 - animations de certains sprites
+- tuto
 
 ---------------------------------------GITHUB-------------------------------------------------
 
