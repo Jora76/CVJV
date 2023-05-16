@@ -37,6 +37,7 @@ public:
 	void setType(TypeElement changementType);
 	inline Coordonnees getPos() { return position; };
 	float getAngle() const;
+	void colorer(sf::Color couleur);
 protected:
 	bool supprimer{ false };
 	static bool valider;

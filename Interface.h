@@ -15,6 +15,7 @@ public:
 	void ajouterBouton(std::unique_ptr<Bouton> bouton);
 	void positionner();
 	void afficher(sf::RenderWindow& window) const;
+	void colorer(sf::Color couleur);
 	void gererCollisions(ElementInterface* curseur);
 	void gererSouris(sf::Event& event, sf::RenderWindow& window, sf::View& view);
 	void nettoyer();
@@ -27,6 +28,7 @@ public:
 	bool dragAutre();
 	inline bool getContinuer() { return continuer; };
 	inline void setContinuer(bool booleen) { continuer = booleen; };
+	//inline void setAfficher(bool booleen) { afficherElem = booleen; };
 
 	void setComptPanneaux(size_t i, unsigned short int compt);
 	void actualiserComptPanneau(unsigned short int terme, int typePanneau);
@@ -42,7 +44,8 @@ private:
 	std::vector<std::unique_ptr<Bouton>> boutons{};
 	
 	bool aVider = false;
-	bool continuer{ false }; 
+	bool continuer{ false };
+	//bool afficherElem = true;
 	Coordonnees positionBouton;
 	std::array <unsigned short int, 5> compteursPanneaux;
 	std::array <unsigned short int, 5> compteursPanneauxInit;

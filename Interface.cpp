@@ -17,17 +17,33 @@ void Interface::ajouterBouton(std::unique_ptr<Bouton> bouton)
 
 void Interface::afficher(sf::RenderWindow& window) const //affiche les éléments dans la fenetre lorsque la méthode est appelée dans le main
 {
+	/*std::cout << "afficherElem = " << afficherElem << std::endl;
+	if (afficherElem) 
+	{*/
+		for (auto& element : elements)
+		{
+			element->afficher(window);
+		}
+
+		for (auto& bouton : boutons)
+		{
+			bouton->afficher(window);
+		}
+	//}
+}
+
+void Interface::colorer(sf::Color couleur)
+{
 	for (auto& element : elements)
 	{
-		element->afficher(window);
+		element->colorer(couleur);
 	}
 
 	for (auto& bouton : boutons)
 	{
-		bouton->afficher(window);
+		bouton->colorer(couleur);
 	}
 }
-
 
 void Interface::positionner() //place les élements dans l'interface
 {

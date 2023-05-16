@@ -30,11 +30,11 @@ public :
 	void continuer();
 
 	bool terminerJeu = false;
+	GestionnaireTexte& texte;
 
 private:
 	Interface& interface;
 	Enigme &enigme;
-	GestionnaireTexte& texte;
 	sf::Event& event;
 
 	short unsigned int compteur{ 0 };

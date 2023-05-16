@@ -4,6 +4,7 @@ Arrivee::Arrivee(Interface& interface_ptr, Coordonnees const& position_ptr) : El
 {
 	type = TypeElement::ARRIVEE;
 	position = position_ptr;
+	son.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/arrivee.wav"));
 }
 
 void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
@@ -12,6 +13,10 @@ void Arrivee::reagirCollision(TypeElement typeAutre, float angle)
 	{
 		if (interface.verifierCheckPoints() == true)
 		{
+			son.play();
+			chrono.restart().asSeconds();
+			while (chrono.getElapsedTime() < son.getBuffer()->getDuration()) {
+			}
 			interface.vider();
 		}
 		else

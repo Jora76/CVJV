@@ -10,7 +10,7 @@ void Menu::demarrer()
 	interface.ajouter(std::make_unique<Titre>(position));
 	position.setX(620);
 	position.setY(400);
-	interface.ajouterBouton(std::make_unique<BoutonJouer>(interface, jeu, position));
+	interface.ajouterBouton(std::make_unique<BoutonJouer>(window, interface, jeu, position));
 	position.setY(550);
 	interface.ajouterBouton(std::make_unique<BoutonQuitter>(window, position));
 	jeu.initTexte();

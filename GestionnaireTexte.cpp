@@ -33,6 +33,7 @@ void GestionnaireTexte::ajouter(std::string& contenuTxt, const Coordonnees& posi
 		textesInstruction.push_back(texte);
 		break;
 	case TypeTexte::AUTRE:
+		//
 		textesAutres.push_back(texte);
 		break;
 	case TypeTexte::DIALOGUE:
@@ -41,10 +42,10 @@ void GestionnaireTexte::ajouter(std::string& contenuTxt, const Coordonnees& posi
 	}
 }
 
-void GestionnaireTexte::afficher(sf::Text& texte)
-{
-	window.draw(texte);
-}
+//void GestionnaireTexte::afficher(sf::Text& texte)
+//{
+//	window.draw(texte);
+//}
 
 void GestionnaireTexte::afficher()
 {

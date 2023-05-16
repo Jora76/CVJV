@@ -6,7 +6,7 @@ using namespace std;
 
 ElementInterface::ElementInterface(string_view const& chemin)
 {
-	sprite.setTexture(GestionnaireRessources::getRessource(chemin)); //application de la texture du sprite
+	sprite.setTexture(GestionnaireRessources<sf::Texture>::getRessource(chemin)); //application de la texture du sprite
 	sprite.setScale(sprite.getScale().x / 2.6f, sprite.getScale().x / 2.6f);  //determination de la taille du sprite. De base 100px / 100px, résultat 40px / 40px
 	sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2); //détermination du centre de rotation du sprite
 }
@@ -48,6 +48,11 @@ float ElementInterface::getRayon() const
 float ElementInterface::getAngle() const
 {
 	return sprite.getRotation();
+}
+
+void ElementInterface::colorer(sf::Color couleur)
+{
+	sprite.setColor(couleur);
 }
 
 TypeElement ElementInterface::getType() const

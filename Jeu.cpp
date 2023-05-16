@@ -38,7 +38,7 @@ void Jeu::choisirEnigme()
     cheminFenetre = "ressources/sprites/Fenetre_" + std::to_string(compteur) + ".png";
 }
 
-void Jeu::actualiserTexte(sf::RenderWindow& window) //gerer tout court, pas juste texte
+void Jeu::actualiserTexte(sf::RenderWindow& window) 
 {
     switch (instanceActuelle)
     {
@@ -140,9 +140,9 @@ void Jeu::initDialogues()
 
 void Jeu::continuer()
 {
+    setInstance();
     texte.vider();
     interface.vider();
-    setInstance();
     demarrer();
     initTexte();
     interface.setContinuer(false);
@@ -154,10 +154,6 @@ void Jeu::actualiser(sf::RenderWindow& window)
     {
         continuer();
     }
-    /*else
-    {
-        terminer();
-    }*/
     actualiserTexte(window);
 }
 
