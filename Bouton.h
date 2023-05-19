@@ -1,5 +1,6 @@
 #pragma once
 #include "ElementInterface.h"
+#include "GestionnaireRessources.h"
 #include <iostream>
 
 class Bouton :
@@ -19,6 +20,8 @@ protected:
     virtual void reagirSouris(bool sourisDessus);
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view);
     static constexpr float COEF_TAILLE = 0.8f;
+    /*sf::Sound clic;
+    sf::Sound dessus;*/
 private:
 };
 

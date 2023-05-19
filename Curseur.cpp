@@ -7,6 +7,7 @@ Curseur::Curseur(Interface& interface_ptr, Coordonnees const& position_ptr) : Bo
 	type = TypeElement::CURSEUR;
 	position = position_ptr; //initialisation de la position du sprite
 	posInit = position_ptr;
+	erreur.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/erreur.wav"));
 }
 
 void Curseur::mettreAJour(float temps) //methode qui calcule les déplacements du curseur en fonction du panneau rencontré et de l'état du bonton valider
@@ -75,6 +76,10 @@ void Curseur::reagirCollision(TypeElement typeAutre, float angle)
 		switch (typeAutre)
 		{
 		case TypeElement::OBSTACLE:
+			erreur.play();
+			chrono.restart().asSeconds();
+			while (chrono.getElapsedTime() < erreur.getBuffer()->getDuration()) {
+			}
 			Interrupteur::setOuvert();
 			interface.reinitialiserGrille();
 			resetPosition();

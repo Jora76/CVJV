@@ -5,6 +5,8 @@ bool ElementInterface::valider = false;
 Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : ElementInterface {chemin}
 {
 	type = TypeElement::AUTRE;
+	/*clic.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/clic.wav"));
+	dessus.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/dessus.wav"));*/
 }
 
 bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view)

@@ -6,6 +6,7 @@
 #include "Interface.h"
 #include "Panneau.h"
 #include "Interrupteur.h"
+#include "GestionnaireRessources.h"
 
 class Curseur : public Bouton
 {
@@ -28,6 +29,7 @@ private:
 	Coordonnees posInit{};
 	sf::Clock chrono;
 	sf::Clock dernierClic;
+	sf::Sound erreur;
 
 	static constexpr float ACCELERATION{ 250.f };
 };
