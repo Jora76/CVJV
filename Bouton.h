@@ -20,8 +20,8 @@ protected:
     virtual void reagirSouris(bool sourisDessus);
     virtual void testerClic(sf::Event& event, sf::RenderWindow& window, sf::View& view);
     static constexpr float COEF_TAILLE = 0.8f;
-    /*sf::Sound clic;
-    sf::Sound dessus;*/
+    sf::Sound dessus;
+    bool jouerSon{ true };
 private:
 };
 

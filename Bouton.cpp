@@ -5,8 +5,8 @@ bool ElementInterface::valider = false;
 Bouton::Bouton(Coordonnees const& position_ptr, std::string_view chemin) : ElementInterface {chemin}
 {
 	type = TypeElement::AUTRE;
-	/*clic.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/clic.wav"));
-	dessus.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/dessus.wav"));*/
+	dessus.setBuffer(GestionnaireRessources<sf::SoundBuffer>::getRessource("ressources/sons/dessus.wav"));
+	dessus.setVolume(80.f);
 }
 
 bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::View& view)
@@ -22,7 +22,7 @@ bool Bouton::sourisEstDessus(sf::Event& event, sf::RenderWindow& window, sf::Vie
 
 
 	if ((sourisGlobalPos.x < btnxPosWidht && sourisGlobalPos.x > btnxPosReelle && sourisGlobalPos.y < btnyPosHeight && sourisGlobalPos.y > btnyPosReelle) || type == TypeElement::PANNEAU_DRAG)
-	{
+ 	{
 		reagirSouris(true);
 		testerClic(event, window, view);
 		return true;
@@ -52,6 +52,11 @@ void Bouton::reagirSouris(bool sourisDessus)
 	sf::Vector2f tailleBtn = sprite.getScale();
 	if (sourisDessus == true)
 	{
+		if (jouerSon) 
+		{
+			dessus.play();
+			jouerSon = false;
+		}
 		if (!tailleMax)
 		{
 			tailleMax = true;
@@ -60,6 +65,7 @@ void Bouton::reagirSouris(bool sourisDessus)
 	}
 	else
 	{
+		jouerSon = true;
 		if (tailleMax)
 		{
 			tailleMax = false;

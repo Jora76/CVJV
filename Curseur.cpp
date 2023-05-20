@@ -135,9 +135,19 @@ void Curseur::reagirClic(sf::Event& event)
 void Curseur::reagirSouris(bool sourisDessus)
 {
 	if (sourisDessus)
+	{
+		if (jouerSon)
+		{
+			dessus.play();
+			jouerSon = false;
+		}
 		sprite.setColor(sf::Color::Color(0, 255, 0, 255));
+	}
 	else
+	{
 		sprite.setColor(sf::Color::Color(0, 150, 0, 255));
+		jouerSon = true;
+	}
 }
 
 void Curseur::resetPosition()

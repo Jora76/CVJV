@@ -18,7 +18,7 @@ class GestionnaireRessources
 			{
 				if (!ressources[chemin].loadFromFile(chemin.data()))
 				{
-					std::cerr << "Erreur : impossible de charger la texture " << chemin << std::endl;
+					std::cerr << "Erreur : impossible de charger la ressource" << chemin << std::endl;
 				}
 				//ressources[chemin].setSmooth(true);
 				return ressources[chemin];
